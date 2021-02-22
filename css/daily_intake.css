@@ -1,0 +1,27 @@
+body {
+    background-color: #BBDEFB;
+}
+
+.border_header {
+    border: 2px solid black;
+    border-radius: 10px;
+}
+.h1_column{
+    border-bottom: 2px solid black
+}
+
+.column {
+    border: 2px solid black;
+    display: inline-block;
+    border-radius: 10px;
+}
+
+.textarea_daily {
+    font-family: monospace;
+    border-color: #607d8b;
+    background-color: #eceff1;
+    font-size: 15px;
+}
+.resizable-disable {
+    resize: none;
+}

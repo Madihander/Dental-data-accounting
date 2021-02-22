@@ -1,0 +1,67 @@
+/*body{background-color: #BBDEFB;}*/
+.border_header {
+    border: 2px solid black;
+    border-radius: 10px;
+}
+.input_table{
+    width:20%;
+    border:2px solid black;
+    text-align: center;
+}
+.input_table_line{
+    width:4%;
+    border:4px solid black;
+    text-align: center;
+}
+
+.field-card {
+    padding: 2px 8px 2px 8px;
+}
+
+.textarea-label {
+    display: inline-block;
+    padding: 0 8px 0 8px;
+    background-color: #607d8b;
+    color: white;
+}
+
+
+.resizable-disable {
+    resize: none;
+}
+
+.textarea-pacient-card {
+    font-family: monospace;
+    border-color: #607d8b;
+    background-color: #eceff1;
+}
+.td_table{
+    padding:0;
+    text-align: center;
+}
+.input_td{
+    border: 0;
+    width:100%;
+    background: none;
+    text-align: center;
+}
+.brick {
+    background: #fff;
+}
+.podzub{
+    font-size: 14px;
+    font-weight: 500;
+}
+.zub_img {
+    width: 45px;
+    height: 45px;
+}
+.zub_row_left {
+    border-right: 1px solid #BDBDBD;
+}
+div.zub_row_left div:not(:last-child) {
+    margin-right: 6px;
+}
+.zub_row_right div:not(:first-child) {
+    margin-left: 6px;
+}
