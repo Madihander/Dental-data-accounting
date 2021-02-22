@@ -1,0 +1,28 @@
+.brick {
+    border: 1px solid gray;
+    border-radius: 5px;
+    background: #fff;
+}
+
+.zub_img {
+    width: 45px;
+    height: 45px;
+}
+
+.zub_row_left {
+    border-right: 1px solid #BDBDBD;
+}
+
+div.zub_row_left div:not(:last-child) {
+    margin-right: 6px;
+}
+
+.zub_row_right div:not(:first-child) {
+    margin-left: 6px;
+}
+
+.podzub {
+    font-size: 14px;
+    font-weight: 500;
+}
+

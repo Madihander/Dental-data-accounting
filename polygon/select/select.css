@@ -1,0 +1,53 @@
+.select {
+    width: 250px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.select.is-active .select_body{
+    opacity: 0;
+}
+
+.select_head {
+    display: flex;
+    border: 1px solid #ccc;
+    cursor: pointer;
+
+}
+
+.select_current {
+    font-size: 19px;
+    line-height: 24px;
+    padding: 8px;
+}
+
+.select_icon {
+    display: flex;
+    height: 40px;
+    width: 40px;
+    flex-shrink: 0;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-left: auto;
+}
+
+.select_body {
+    border: 1px solid #ccc;
+    border-top: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+}
+
+.select-item {
+    line-height: 24px;
+    padding: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.select-item:hover {
+    background: red;
+}
