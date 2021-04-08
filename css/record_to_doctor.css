@@ -8,50 +8,71 @@ select{
     height:40%;
     text-align: center;
 }
-td {
+th,td {
+    color:white;
+    font-size: 20px;
+    text-align: left
+}
+.table_patient{
+    background-color: #00b49d;
+    border-radius: 8px;
+    box-shadow: 20px 20px 15px 8px rgba(0,0,0,0.7);
+}
+
+.floating_input{
+    border-radius: 5px;
+    box-shadow: 10px 10px 20px 5px rgba(0,0,0,0.7);
+    transition: .3s;
+}
+.floating_input:hover{
+    background: #fc7400;
+    box-shadow: 0 0 30px #ffa001;
+    color: #ffffff;
+    transform: translateY(-3px);
+}
+
+.floating_button{
+    text-decoration: none;
+    display: inline-block;
+    line-height: 1.5625em;
+    border-radius: .625em;
+    font-size: 1.125em;
     text-align: center;
+    font-weight: 400;
+    color: #212121;
+    background: #007563;
+    box-shadow: 0 0.5em 0.937em rgba(0,0,0,0.1);
+    transition: .3s;
 }
-.td_img {
-    opacity: 0;
-    margin: 0;
-}
-.td_img:hover {
-    opacity: 1;
-    -webkit-animation: fade-in-bck 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    animation: fade-in-bck 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+.floating_button:hover{
+    background: #fc7400;
+    box-shadow: 0 0 30px #ffa001;
+    color: #ffffff;
+    transform: translateY(-3px);
 }
 
 .day_indic {
     text-align: center;
-    background-color: #7b1fa2;
+    background-color: #fc7400;
     color: #ffffff;
     height: 10em;
+    border-radius: 8px;
+    box-shadow: 20px 20px 15px 8px rgba(0,0,0,0.7);
 }
-.ui-datepicker-trigger{
+#datepicker{
+    box-shadow: 20px 20px 15px 8px rgba(0,0,0,0.7);
+    border-radius: 8px;
+}
+.ui-datepicker-trigger {
+    margin-left: 5px;
     position: relative;
-    cursor:pointer;
+    top: 3px;
+    cursor: pointer;
 }
 
-.brick {
-    border: 1px solid gray;
-    border-radius: 5px;
-    background: #fff;
+._error{
+    border: 2px solid red;
+
 }
-.podzub{
-    font-size: 14px;
-    font-weight: 500;
-}
-.zub_img {
-    width: 45px;
-    height: 45px;
-}
-.zub_row_left {
-    border-right: 1px solid #BDBDBD;
-}
-div.zub_row_left div:not(:last-child) {
-    margin-right: 6px;
-}
-.zub_row_right div:not(:first-child) {
-    margin-left: 6px;
-}
+
 
