@@ -1,6 +1,4 @@
-body {
-    background-color: #BBDEFB;
-}
+
 a:hover {
     text-decoration: none;
 }
@@ -13,11 +11,24 @@ a:hover {
     display: flex;
     align-items: center;
 }
-
-.btn {
-    border: 2px solid black;
-    border-radius: 15px;
-    color: black;
+.floating_button{
+    text-decoration: none;
+    display: inline-block;
+    line-height: 1.5625em;
+    border-radius: .625em;
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: 700;
+    color: #212121;
+    background: #007563;
+    box-shadow: 0 0.5em 0.937em rgba(0,0,0,0.1);
+    transition: .3s;
+}
+.floating_button:hover{
+    background: #fc7400;
+    box-shadow: 0 0 30px #ffa001;
+    color: #ffffff;
+    transform: translateY(-3px);
 }
 
 .column {
