@@ -8,8 +8,8 @@
 
 $host = 'localhost';
 $db = 'electronic_journal_kz';
-$user = 'admin';
-$pass = 'admin';
+$user = 'root';
+$pass = 'root';
 $charset = 'utf8';
 
 // специальнгая ссылка для подключения к MySQL базе данных

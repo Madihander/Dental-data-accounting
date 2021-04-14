@@ -10,25 +10,22 @@
 </head>
 <body>
 <div class="over_view">
-
     <h1 class="pb-2" style="color: #00b49d">Avior MK</h1>
-
     <ul>
         <li>
             <div class="m-2 pr-3 pl-3">
-                <a href="journals/record_to_doctor.php" class="floating_button">
+                <a href="journals/record_to_doctor.html" class="floating_button">
                     РАСПИСАНИЕ ПРИЕМА
                 </a>
             </div>
         </li>
         <li>
             <div class="m-2 pr-3 pl-3">
-                <a href="journals/patient_card.php" class="floating_button">
+                <a href="journals/patient_card.html" class="floating_button">
                     ЛИЧНАЯ КАРТА ПАЦИЕНТА
                 </a>
             </div>
         </li>
-
 <!--
         <li>
             <div class="m-2 pr-3 pl-3">
@@ -58,3 +55,4 @@
     </ul>
 </div>
 </body>
+</html>

@@ -11,12 +11,6 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",
             url: "form_hardlend.php",
-            data: {
-                'number': number,
-                'word': word,
-                'video': video,
-                'book': book,
-            },
             processData: false,
 
             beforeSend: function () {

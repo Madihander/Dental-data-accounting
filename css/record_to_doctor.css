@@ -13,6 +13,13 @@ th,td {
     font-size: 20px;
     text-align: left
 }
+.red{
+    border-right:1px red solid
+}
+.black{
+    border-bottom: 1px red solid;
+    color: white;
+}
 .table_patient{
     background-color: #00b49d;
     border-radius: 8px;

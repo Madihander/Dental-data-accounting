@@ -54,6 +54,7 @@ https://itchief.ru/bootstrap/modal-->
         <div class="col-1"></div>
     </div>
 </div>
+<!--Модальное окно для того чтобы записать пациента-->
 <div id="recordingCard" class="modal fade">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
@@ -71,7 +72,7 @@ https://itchief.ru/bootstrap/modal-->
                         </div>-->
                         <div class="col-7"></div>
                         <div class="col-1">
-                            <a href="patient_card.php">
+                            <a href="patient_card.html">
                                 <img src="#" alt="record">
                             </a>
                         </div>
@@ -196,6 +197,7 @@ https://itchief.ru/bootstrap/modal-->
         </div>
     </div>
 </div>
+<!--Модальное окно для того чтобы показать записанного пациента-->
 <div id="recordedCard" class="modal fade">
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
@@ -213,7 +215,7 @@ https://itchief.ru/bootstrap/modal-->
                         </div>-->
                         <div class="col-7"></div>
                         <div class="col-1">
-                            <a href="patient_card.php">
+                            <a href="patient_card.html">
                                 <img src="#" alt="record">
                             </a>
                         </div>

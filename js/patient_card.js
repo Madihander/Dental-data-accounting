@@ -1,4 +1,5 @@
 
+//чтобы менять картинки зубов и их значения
 function caries(toothId) {
     $(toothId).attr('src', 'caries.png');
     $(toothId).attr('value','caries');
@@ -7,7 +8,7 @@ function pulpit(toothId) {
     $(toothId).attr('src', 'pulpit.png');
     $(toothId).attr('value','pulpit');
 }
-function paradont(toothId) {
+function peredont(toothId) {
     $(toothId).attr('src', 'paradont.png');
     $(toothId).attr('value','paradont');
 }
@@ -15,28 +16,26 @@ function paradont(toothId) {
 //Что все связанно с Диагнозом
 //////////////////////////////////////////////
 function showDiagnosis(){
-    $('.categoriesDiagnosis').removeAttr("hidden");
+    $('.categoryDiagnosis').removeAttr('hidden')
     $('.categoriesComplaint').attr("hidden","true");
-    $('.categoriesAnamnesis').attr("hidden","true");
+    $('.categoryAnamnesis').attr("hidden","true");
     $('.categoriesObjectively').attr("hidden","true");
     $('.categoriesTreatment').attr("hidden","true");
     $('.categoriesRecommend').attr("hidden","true");
-
 }
-
 function showCariesDiagnosis() {
     $('div.caries_diagnosis').removeAttr("hidden");
-    $('div.peredont_diagnosis').attr("hidden","true");
+    $('div.paradont_diagnosis').attr("hidden","true");
     $('div.pulpit_diagnosis').attr("hidden","true");
 }
 function showParadontDiagnosis() {
     $('div.caries_diagnosis').attr("hidden","true");
-    $('div.peredont_diagnosis').removeAttr("hidden");
+    $('div.paradont_diagnosis').removeAttr("hidden");
     $('div.pulpit_diagnosis').attr("hidden","true");
 }
 function showPulpitDiagnosis(){
     $('div.caries_diagnosis').attr("hidden","true");
-    $('div.peredont_diagnosis').attr("hidden","true");
+    $('div.paradont_diagnosis').attr("hidden","true");
     $('div.pulpit_diagnosis').removeAttr("hidden");
 }
 
@@ -54,8 +53,8 @@ function getCheckedRadioDiagnosis() {
 
 //Что все связанно с Жалобами
 //////////////////////////////////////////////
-function showComplains(){$(
-    '.categoriesDiagnosis').attr("hidden","true");
+function showComplains(){
+    $('.categoriesDiagnosis').attr("hidden","true");
     $('.categoriesComplaint').removeAttr("hidden");
     $('.categoriesAnamnesis').attr("hidden","true");
     $('.categoriesObjectively').attr("hidden","true");
@@ -94,9 +93,9 @@ function getCheckedCheckBoxesComplaints(){
 //Что все связанно с Анамнезисом
 //////////////////////////////////////////////
 function showAnamnesis() {
-    $('.categoriesDiagnosis').attr("hidden","true");
+    $('.categoryDiagnosis').attr("hidden","true");
     $('.categoriesComplaint').attr("hidden","true");
-    $('.categoriesAnamnesis').removeAttr("hidden");
+    $('.categoryAnamnesis').removeAttr("hidden");
     $('.categoriesObjectively').attr("hidden","true");
     $('.categoriesTreatment').attr("hidden","true");
     $('.categoriesRecommend').attr("hidden","true");
@@ -277,7 +276,7 @@ function changeRowOfTeethOnSmall() {
                     <div class="col-6 upRowTeethRight pr-2 d-flex justify-content-end zub_row_left">
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth55' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth55' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth55">
                             <li><button onclick='caries("#tooth55")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth55")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -288,7 +287,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth54' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth54' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth54">
                             <li><button onclick='caries("#tooth54")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth54")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -299,7 +298,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth53' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth53' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth53">
                             <li><button onclick='caries("#tooth53")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth53")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -310,7 +309,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth52' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth52' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth52">
                             <li><button onclick='caries("#tooth52")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth52")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -321,7 +320,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth51' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth51' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth51">
                             <li><button onclick='caries("#tooth51")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth51")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -335,7 +334,7 @@ function changeRowOfTeethOnSmall() {
                     <div class="col-6  pr-2 d-flex justify-content-end zub_row_right">
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth61' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth61' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth61">
                             <li><button onclick='caries("#tooth61")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth61")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -346,7 +345,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth62' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth62' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth62">
                             <li><button onclick='caries("#tooth62")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth62")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -357,7 +356,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth63' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth63' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth63">
                             <li><button onclick='caries("#tooth63")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth63")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -368,7 +367,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth64' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth64' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth64">
                             <li><button onclick='caries("#tooth64")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth64")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -379,7 +378,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth65' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth65' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth65">
                             <li><button onclick='caries("#tooth65")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth65")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -395,7 +394,7 @@ function changeRowOfTeethOnSmall() {
                             <div class="col" style="height: 1px; background-color: #BDBDBD"></div>
                             <div class="col-1 p-0 d-flex align-items-center justify-content-center">
                                 <button onclick="changeRowOfTeethOnBig()">
-                                  <img src="zub.svg" style="width: 30px; height: 30px;">
+                                  <img src="../journals/zub.svg" style="width: 30px; height: 30px;">
                                 </button>
                             </div>
                             <div class="col" style="height: 1px; background-color: #BDBDBD"></div>
@@ -406,7 +405,7 @@ function changeRowOfTeethOnSmall() {
                     <div class="col-6  pr-2 d-flex justify-content-end zub_row_left">
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth85' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth85' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth85">
                             <li><button onclick='caries("#tooth85")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth85")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -417,7 +416,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth84' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth84' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth84">
                             <li><button onclick='caries("#tooth84")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth84")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -428,7 +427,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth83' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth83' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth83">
                             <li><button onclick='caries("#tooth83")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth83")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -439,7 +438,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth82' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth82' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth82">
                             <li><button onclick='caries("#tooth82")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth82")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -450,7 +449,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth81' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth81' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth81">
                             <li><button onclick='caries("#tooth81")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth81")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -464,7 +463,7 @@ function changeRowOfTeethOnSmall() {
                     <div class="col-6  pr-2 d-flex justify-content-end zub_row_right">
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth71' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth71' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth71">
                             <li><button onclick='caries("#tooth71")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth71")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -475,7 +474,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth72' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth72' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth72">
                             <li><button onclick='caries("#tooth72")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth72")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -486,7 +485,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth73' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth73' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth73">
                             <li><button onclick='caries("#tooth73")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth73")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -497,7 +496,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth74' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth74' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth74">
                             <li><button onclick='caries("#tooth74")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth74")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -508,7 +507,7 @@ function changeRowOfTeethOnSmall() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth75' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth75' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth75">
                             <li><button onclick='caries("#tooth75")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth75")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -532,7 +531,7 @@ function changeRowOfTeethOnBig() {
                     <div class="col-6 upRowTeethRight pr-2 d-flex justify-content-end zub_row_left">
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth18' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth18' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth18">
                             <li><button onclick='caries("#tooth18")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth18")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -543,7 +542,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                           <input id='tooth17' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                           <input id='tooth17' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth17">
                             <li><button onclick='caries("#tooth17")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth17")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -554,7 +553,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth16' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth16' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth16">
                             <li><button onclick='caries("#tooth16")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth16")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -565,7 +564,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth15' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth15' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth15">
                             <li><button onclick='caries("#tooth15")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth15")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -576,7 +575,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth14' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth14' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth14">
                             <li><button onclick='caries("#tooth14")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth14")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -587,7 +586,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth13' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth13' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth13">
                             <li><button onclick='caries("#tooth13")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth13")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -598,7 +597,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth12' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth12' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth12">
                             <li><button onclick='caries("#tooth12")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth12")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -609,7 +608,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth11' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth11' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth11">
                             <li><button onclick='caries("#tooth11")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth11")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -623,7 +622,7 @@ function changeRowOfTeethOnBig() {
                     <div class="col-6  pr-2 d-flex justify-content-end zub_row_left">
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth21' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth21' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth21">
                             <li><button onclick='caries("#tooth21")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth21")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -634,7 +633,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                           <input id='tooth22' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                           <input id='tooth22' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth22">
                             <li><button onclick='caries("#tooth22")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth22")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -645,7 +644,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth23' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth23' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth23">
                             <li><button onclick='caries("#tooth23")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth23")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -656,7 +655,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth24' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth24' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth24">
                             <li><button onclick='caries("#tooth24")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth24")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -667,7 +666,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth25' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth25' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth25">
                             <li><button onclick='caries("#tooth25")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth25")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -678,7 +677,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth26' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth26' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth26">
                             <li><button onclick='caries("#tooth26")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth26")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -689,7 +688,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth27' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth27' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth27">
                             <li><button onclick='caries("#tooth27")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth27")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -700,7 +699,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth28' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth28' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth28">
                             <li><button onclick='caries("#tooth28")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth28")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -717,7 +716,7 @@ function changeRowOfTeethOnBig() {
                             <div class="col" style="height: 1px; background-color: #BDBDBD"></div>
                             <div class="col-1 p-0 d-flex align-items-center justify-content-center">
                                 <button onclick="changeRowOfTeethOnSmall()">
-                                  <img src="zub.svg" style="width: 30px; height: 30px;">
+                                  <img src="../journals/zub.svg" style="width: 30px; height: 30px;">
                                 </button>
                             </div>
                             <div class="col" style="height: 1px; background-color: #BDBDBD"></div>
@@ -729,7 +728,7 @@ function changeRowOfTeethOnBig() {
                     <div class="col-6  pr-2 d-flex justify-content-end zub_row_left">
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth48' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth48' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth48">
                             <li><button onclick='caries("#tooth48")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth48")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -740,7 +739,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                           <input id='tooth47' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                           <input id='tooth47' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth47">
                             <li><button onclick='caries("#tooth47")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth47")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -751,7 +750,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth46' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth46' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth46">
                             <li><button onclick='caries("#tooth46")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth46")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -762,7 +761,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth45' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth45' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth45">
                             <li><button onclick='caries("#tooth45")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth45")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -773,7 +772,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth44' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth44' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth44">
                             <li><button onclick='caries("#tooth44")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth44")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -784,7 +783,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth43' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth43' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth43">
                             <li><button onclick='caries("#tooth43")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth43")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -795,7 +794,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth42' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth42' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth42">
                             <li><button onclick='caries("#tooth42")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth42")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -806,7 +805,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth41' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth41' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth41">
                             <li><button onclick='caries("#tooth41")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth41")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -820,7 +819,7 @@ function changeRowOfTeethOnBig() {
                     <div class="col-6  pr-2 d-flex justify-content-end zub_row_left">
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth31' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth31' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth31">
                             <li><button onclick='caries("#tooth31")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth31")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -831,7 +830,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                           <input id='tooth32' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                           <input id='tooth32' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth32">
                             <li><button onclick='caries("#tooth32")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth32")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -842,7 +841,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth33' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth33' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth33">
                             <li><button onclick='caries("#tooth33")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth33")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -853,7 +852,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth34' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth34' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth34">
                             <li><button onclick='caries("#tooth34")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth34")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -864,7 +863,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth35' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth35' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth35">
                             <li><button onclick='caries("#tooth35")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth35")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -875,7 +874,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth36' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth36' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth36">
                             <li><button onclick='caries("#tooth36")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth36")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -886,7 +885,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth37' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth37' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth37">
                             <li><button onclick='caries("#tooth37")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth37")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -897,7 +896,7 @@ function changeRowOfTeethOnBig() {
                       </div>
                       <div class="d-flex flex-column justify-content-center">
                         <div class="dropdown">
-                            <input id='tooth38' type="image" class=" btn-sm dropright" src="tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
+                            <input id='tooth38' type="image" class=" btn-sm dropright" src="../journals/tooth.png" data-bs-toggle="dropdown" aria-expanded="false"/>
                           <ul class="dropdown-menu" aria-labelledby="tooth38">
                             <li><button onclick='caries("#tooth38")'  class="dropdown-item tooth" >Caries</button></li>
                             <li><button onclick='pulpit("#tooth38")'  class="dropdown-item tooth" >Pulpit</button></li>
@@ -917,11 +916,11 @@ function changeRowOfTeethOnBig() {
 
 
 
-
+//После Нажатия на кнопку "Сохранить"-> ajax запрос в базу чтобы добавить новые данные
 function insertData() {
 
     $.ajax({
-        url:'../php/insert_data.php',
+        url:'../php/patient_card/insert_data_patient.php',
         type:'POST',
         data: {
             fullName: $('#fullName').val(),

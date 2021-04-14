@@ -1,9 +1,12 @@
+
 let form = $('#form');
+//Эта Функция нужна для того чтобы перемещать строки в таблице пациентов
 $(function () {
     $('#tbody').sortable({
         connectWith: ".connectedSortable"
     }).disableSelection();
 });
+//Показывать иконку каледаря в модальном окне
 $(function () {
     $("#minDatepicker").datepicker({
         showOn: "button",
@@ -12,9 +15,11 @@ $(function () {
         buttonText: "выбрать дату"
     });
 });
+//Маска для номера телефона в модальном окне
 $(function () {
     $("#phoneNumber").mask("+7(999)999-99-99")
 });
+
 $(function () {
     $("#datepicker").datepicker({
         minDate: 0,
@@ -186,6 +191,8 @@ function writeMonth(Month) {
     $("#month_id").text(Month);
 }
 
+//Эта Функция нужна для того чтобы,например выбрали начало приема 12 то уже в поле выбора конца приема не будет 9,10,11
+// , это для модального онка
 function hideOption() {
     let time = $('#startTimeHour').val();
     if (time === '09') {
@@ -333,17 +340,18 @@ function hideOption() {
     }
 }
 
+// Эта функция которая, запускает функцию проверки, если ошибок словленных в formValidate > 0 то alert,
+// иначе отправляем данные
 function formSend(e) {
-    recordPatient();
-    /*let error = formValidate(form)
+    let error = formValidate(form)
     if(error === 0 ){
         alert('SUCCESS');
         recordPatient();
     }else {
         alert('DANGER');
-    }*/
+    }
 }
-
+// Функция проверяющие на заполнение и regex поля в модальном окне
 function formValidate(form) {
     let error = 0;
     let formReq = document.querySelectorAll('._req');
@@ -377,7 +385,7 @@ function formValidate(form) {
     }
     return error;
 }
-
+// Все эти 3 функции сравнивают значение определенного поля по regex и отправляет bool-значение.
 function fullNameTest(input) {
     return (/^([А-ЯA-Z]|[А-ЯA-Z][\x27а-яa-z]{1,}|[А-ЯA-Z][\x27а-яa-z]{1,}-([А-ЯA-Z][\x27а-яa-z]{1,}|(оглы)|(кызы)))\040[А-ЯA-Z][\x27а-яa-z]{1,}(\040[А-ЯA-Z][\x27а-яa-z]{1,})?$/.test(input.value));
 }
@@ -389,16 +397,16 @@ function phoneNumberTest(input) {
 function minDatepickerTest(input) {
     return /^(0?[1-9]|[12][0-9]|3[01])[.](0?[1-9]|1[012])[.]\d{4}$/.test(input.value)
 }
-
+// Убирает красный бордер у поля
 function formRemoveError(input) {
     input.classList.remove('_error')
 }
-
+// Добавляет красный бордер полю
 function formAddError(input) {
     input.classList.add('_error')
 }
 
-
+// Функция собирает проверенные данные после делает Ajax запрос
 function recordPatient() {
     let patientName = $('#fullName').val();
     let patientLament = $('#lament').val();
@@ -422,13 +430,14 @@ function recordPatient() {
         },
         dataType: 'JSON',
     });
-
+// После как ajax произошел функция смотрит какая сегодня дата и какая у поля даты от модального окна
+// Если даты равны, то создается новая строка,которая будет содержать определенные данные модального окна
     if (patientDateRecord === $('#datepicker').val()) {
         let tbody = $('#tbody');
         let tr = document.createElement('tr');
         let record_id = 'record_id_'+startTime;
         tr.innerHTML = `<th scope="time row">
-       <button onclick="showRecordedCard('` + startTime + `','` + patientDateRecord+`','`+record_id+`')">` + startTime + '-' + endTime + '-' + patientDateRecord + `</button>
+       <button onclick="showRecordedCard('` + startTime + `','` + patientDateRecord+`','`+record_id+`')">` + startTime + '-' + endTime + `</button>
 </th>
     <td>` + patientName + ' ,' + patientLament + `</td>`;
         tr.setAttribute('class', 'ui-state-default');
@@ -437,16 +446,17 @@ function recordPatient() {
 
         $('#recordingCard').modal("hide");
         $('.data_patient').val('');
-    } else {
+    }
+    // Если Нет то появляется Alert и все
+    else {
         alert('Пациент записан на ' + patientDateRecord);
         $('#recordingCard').modal("hide");
         $('.data_patient').val('');
     }
 }
-
+// Функция начинает действовать после нажатия на строку записанного пациента в таблице
 function showRecordedCard(time, date,record_id) {
-    alert(134567);
-    alert(record_id);
+    //Ajax запрос,чтобы получить данные данного пациента
     $.ajax({
         url: '../php/record_to_doctor/showRecordedCard.php',
         method: 'POST',
@@ -455,6 +465,7 @@ function showRecordedCard(time, date,record_id) {
             date: date,
         },
         dataType: 'JSON',
+        // Выводим данные в модальном окне
         success: function (data) {
             console.log(data);
             $('#recordedFullName').val(data[0]);
@@ -472,10 +483,11 @@ function showRecordedCard(time, date,record_id) {
         }
     })
 }
-
+// Чтобы закрыть карточку записанного пациента
 function closeCard() {
     $('.recorded_data_patient').val(' ');
 }
+// Чтобы удалить карточка записанного пациента как в базе так и в html таблице
 function deleteCard(elem) {
     $.ajax({
         url: '../php/record_to_doctor/deleteRecordedCard.php',

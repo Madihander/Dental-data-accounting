@@ -1,4 +1,26 @@
 /*body{background-color: #BBDEFB;}*/
+p{
+    color: #ffffff;
+}
+h4{
+    color:#ffffff;
+}
+.floating_input{
+    border-radius: 5px;
+    box-shadow: 10px 10px 20px 5px rgba(0,0,0,0.7);
+    transition: .3s;
+}
+.floating_input:hover{
+    background: #fc7400;
+    box-shadow: 0 0 30px #ffa001;
+    color: #ffffff;
+    transform: translateY(-3px);
+}
+.show_info{
+    color:white;
+}
+
+
 .border_header {
     border: 2px solid black;
     border-radius: 10px;
@@ -59,9 +81,10 @@
 .zub_row_left {
     border-right: 1px solid #BDBDBD;
 }
-div.zub_row_left div:not(:last-child) {
-    margin-right: 6px;
+.zub_row_right {
+    border-left: 1px solid #BDBDBD;
 }
-.zub_row_right div:not(:first-child) {
-    margin-left: 6px;
+
+.list{
+    display: none;
 }

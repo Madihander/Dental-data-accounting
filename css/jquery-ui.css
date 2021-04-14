@@ -982,8 +982,8 @@ a.ui-button:active,
 .ui-button.ui-state-active:hover {
 	/*border: 1px solid #003eff;
 	background: #007fff;*/
-	border:1px solid #4527a0;
-	background: #4527a0;
+	border:1px solid #fc7400;
+	background: #fc7400;
 	font-weight: normal;
 	color: #ffffff;
 }
@@ -1281,25 +1281,25 @@ a.ui-button:active,
 .ui-corner-top,
 .ui-corner-left,
 .ui-corner-tl {
-	border-top-left-radius: 3px;
+	border-top-left-radius: 8px;
 }
 .ui-corner-all,
 .ui-corner-top,
 .ui-corner-right,
 .ui-corner-tr {
-	border-top-right-radius: 3px;
+	border-top-right-radius: 8px;
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-left,
 .ui-corner-bl {
-	border-bottom-left-radius: 3px;
+	border-bottom-left-radius: 8px;
 }
 .ui-corner-all,
 .ui-corner-bottom,
 .ui-corner-right,
 .ui-corner-br {
-	border-bottom-right-radius: 3px;
+	border-bottom-right-radius: 8px;
 }
 
 /* Overlays */
