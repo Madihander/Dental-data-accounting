@@ -45,7 +45,7 @@ require_once '../../includes/db.php';
 //TODO вернуть $lament = $_POST['lament'];
 $fullName =verificationFullName('Петров Петр Петрович');
 $phoneNumber = verificationPhoneNumber('+7(223)121-24-53');
-$dateRecord = verificationDateRecord('21.04.2021');
+$dateRecord = verificationDateRecord('22.04.2021');
 $doctor = '4rthf';
 $startTime = '13:00';
 $endTime = '14:00';
@@ -53,7 +53,7 @@ $lament = 'lament';
 
 //Этот массив будет отправляется ajax
 $response = ['status' => 201, 'error' => null];
-
+$data = [];
 //Проверка записан кто-либо на это время в этот день
 $checkResultDuplicate = checkDuplicatetime($startTime, $dateRecord);
 if (!is_null($checkResultDuplicate)) {
@@ -66,7 +66,7 @@ if (!is_null($checkResultDuplicate)) {
         //exit(sendResponse());
     }
 }
-
+dataHashing($fullName,$phoneNumber,$dateRecord);
 
 global $pdo;
 $sql = "INSERT INTO patients.patients_record_data(fullName, lament, 
@@ -74,13 +74,13 @@ phoneNumber, dateRecord, doctor,startTime,endTime)
 VALUES(:fullName, :lament, :phoneNumber, :dateRecord, :doctor,:startTime,:endTime)";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([
-    'fullName' => $fullName,
-    'lament' => $lament,
-    'phoneNumber' => $phoneNumber,
-    'dateRecord' => $dateRecord,
+    'fullName' => $data['0'],
+    'phoneNumber' => $data['1'],
+    'dateRecord' => $data['2'],
     'doctor' => $doctor,
     'startTime' => $startTime,
     'endTime' => $endTime,
+    'lament' => $lament,
 ]);
 $response['status'] = '200';
 $response['error'] = '00';
@@ -109,7 +109,7 @@ function verificationFullName($login)
     } else {
         $response['status'] = '200';
         $response['error'] = '00';
-        return dataHashing($login);
+        return $login;
     }
 }
 
@@ -124,7 +124,7 @@ function verificationPhoneNumber($number)
     } else {
         $response['status'] = '200';
         $response['error'] = '00';
-        return dataHashing($number);
+        return $number;
     }
 }
 
@@ -139,7 +139,7 @@ function verificationDateRecord($date)
     } else {
         $response['status'] = '200';
         $response['error'] = '00';
-        return dataHashing($date);
+        return $date;
     }
 }
 
@@ -155,7 +155,7 @@ function verificationDoctor($doctor)
     } else {
         $response['status'] = '200';
         $response['error'] = '00';
-        return dataHashing($doctor);
+        return $doctor;
     }
 }
 
@@ -171,7 +171,7 @@ function verificationStartTime($start)
     } else {
         $response['status'] = '200';
         $response['error'] = '00';
-        return dataHashing($start);
+        return $start;
     }
 }
 
@@ -187,7 +187,7 @@ function verificationEndTime($end)
     } else {
         $response['status'] = '200';
         $response['error'] = '00';
-        return dataHashing($end);
+        return $end;
     }
 }
 
@@ -203,14 +203,19 @@ function verificationLament($lament)
     } else {
         $response['status'] = '200';
         $response['error'] = '00';
-        return dataHashing($lament);
+        return $lament;
     }
 }
 
 // Хешируем данные
-function dataHashing($data)
+function dataHashing($fullName,$phoneNumber,$dateRecord)
 {
-    $data = password_hash($data, PASSWORD_BCRYPT);
+    global $data;
+    $fullName = password_hash($fullName, PASSWORD_BCRYPT);
+    $phoneNumber = password_hash($phoneNumber,PASSWORD_BCRYPT);
+    $dateRecord = password_hash($dateRecord,PASSWORD_BCRYPT);
+    array_push($data,$fullName,$phoneNumber,$dateRecord);
+    print_r($data);
     return $data;
 }
 
