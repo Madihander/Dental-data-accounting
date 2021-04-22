@@ -511,6 +511,15 @@ function deleteCard(elem) {
     })
 }
 
+//Сортирует строки в таблице
+function sortRecords(){
+    let sortedRows = Array.from(tbody.rows)
+        .slice(1)
+        .sort((rowA, rowB) => rowA.cells[0].innerHTML > rowB.cells[0].innerHTML ? 1 : -1);
+
+    tbody.tBodies[0].append(...sortedRows);
+}
+
 /*function insertData(patientName,lament,number,dateRecord,doctor,startTime,endTime) {
 
 }*/
