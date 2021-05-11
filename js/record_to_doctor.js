@@ -1,4 +1,3 @@
-
 let form = $('#form');
 //Эта Функция нужна для того чтобы перемещать строки в таблице пациентов
 $(function () {
@@ -194,8 +193,10 @@ function writeMonth(Month) {
 //Эта Функция нужна для того чтобы,например выбрали начало приема 12 то уже в поле выбора конца приема не будет 9,10,11
 // , это для модального онка
 function hideOption() {
-    let time = $('#startTimeHour').val();
-    if (time === '09') {
+    let startTime = $('#startTimeHour').val();
+    let endTime = $('#endTimeHour').val();
+    if (startTime === '09') {
+        $('#endHour09').removeAttr("hidden");
         $('#endHour10').removeAttr("hidden");
         $('#endHour11').removeAttr("hidden");
         $('#endHour12').removeAttr("hidden");
@@ -207,7 +208,7 @@ function hideOption() {
         $('#endHour18').removeAttr("hidden");
         $('#endHour19').removeAttr("hidden");
     }
-    if (time === '10') {
+    if (startTime === '10') {
         $('#endHour09').attr("hidden", "true");
         $('#endHour10').removeAttr("hidden");
         $('#endHour11').removeAttr("hidden");
@@ -220,7 +221,7 @@ function hideOption() {
         $('#endHour18').removeAttr("hidden");
         $('#endHour19').removeAttr("hidden");
     }
-    if (time === '11') {
+    if (startTime === '11') {
         $('#endHour09').attr("hidden", "true");
         $('#endHour10').attr("hidden", "true");
         $('#endHour11').removeAttr("hidden");
@@ -233,7 +234,7 @@ function hideOption() {
         $('#endHour18').removeAttr("hidden");
         $('#endHour19').removeAttr("hidden");
     }
-    if (time === '12') {
+    if (startTime === '12') {
         $('#endHour09').attr("hidden", "true");
         $('#endHour10').attr("hidden", "true");
         $('#endHour11').attr("hidden", "true");
@@ -247,7 +248,7 @@ function hideOption() {
         $('#endHour19').removeAttr("hidden");
 
     }
-    if (time === '13') {
+    if (startTime === '13') {
         $('#endHour09').attr("hidden", "true");
         $('#endHour10').attr("hidden", "true");
         $('#endHour11').attr("hidden", "true");
@@ -260,7 +261,7 @@ function hideOption() {
         $('#endHour18').removeAttr("hidden");
         $('#endHour19').removeAttr("hidden");
     }
-    if (time === '14') {
+    if (startTime === '14') {
         $('#endHour09').attr("hidden", "true");
         $('#endHour10').attr("hidden", "true");
         $('#endHour11').attr("hidden", "true");
@@ -273,7 +274,7 @@ function hideOption() {
         $('#endHour18').removeAttr("hidden");
         $('#endHour19').removeAttr("hidden");
     }
-    if (time === '15') {
+    if (startTime === '15') {
         $('#endHour09').attr("hidden", "true");
         $('#endHour10').attr("hidden", "true");
         $('#endHour11').attr("hidden", "true");
@@ -286,7 +287,7 @@ function hideOption() {
         $('#endHour18').removeAttr("hidden");
         $('#endHour19').removeAttr("hidden");
     }
-    if (time === '16') {
+    if (startTime === '16') {
         $('#endHour09').attr("hidden", "true");
         $('#endHour10').attr("hidden", "true");
         $('#endHour11').attr("hidden", "true");
@@ -299,7 +300,7 @@ function hideOption() {
         $('#endHour18').removeAttr("hidden");
         $('#endHour19').removeAttr("hidden");
     }
-    if (time === '17') {
+    if (startTime === '17') {
         $('#endHour09').attr("hidden", "true");
         $('#endHour10').attr("hidden", "true");
         $('#endHour11').attr("hidden", "true");
@@ -312,7 +313,7 @@ function hideOption() {
         $('#endHour18').removeAttr("hidden");
         $('#endHour19').removeAttr("hidden");
     }
-    if (time === '18') {
+    if (startTime === '18') {
         $('#endHour09').attr("hidden", "true");
         $('#endHour10').attr("hidden", "true");
         $('#endHour11').attr("hidden", "true");
@@ -325,7 +326,7 @@ function hideOption() {
         $('#endHour18').removeAttr("hidden");
         $('#endHour19').removeAttr("hidden");
     }
-    if (time === '19') {
+    if (startTime === '19') {
         $('#endHour09').attr("hidden", "true");
         $('#endHour10').attr("hidden", "true");
         $('#endHour11').attr("hidden", "true");
@@ -344,13 +345,14 @@ function hideOption() {
 // иначе отправляем данные
 function formSend(e) {
     let error = formValidate(form)
-    if(error === 0 ){
+    if (error === 0) {
         alert('SUCCESS');
         recordPatient();
-    }else {
+    } else {
         alert('DANGER');
     }
 }
+
 // Функция проверяющие на заполнение и regex поля в модальном окне
 function formValidate(form) {
     let error = 0;
@@ -363,28 +365,34 @@ function formValidate(form) {
         if (input.classList.contains('_fullName')) {
             if (fullNameTest(input) === false) {
                 alert(123456)
-                formAddError(input);
+                formAddError(input, 'Неправильно записано ФИО');
                 error++;
             }
         } else if (input.classList.contains('_phoneNumber')) {
             if (phoneNumberTest(input) === false) {
-                formAddError(input);
+                formAddError(input, 'Неправильно записан номер телефона');
                 error++;
             }
         } else if (input.classList.contains('_minDatepicker')) {
             if (minDatepickerTest(input) === false) {
-                formAddError(input);
+                formAddError(input, 'Неправильно записана Дата');
                 error++;
+            }
+        } else if (input.classList.contains('_endTimeHour')) {
+            if (TimeTest(input) === false) {
+                formAddError(input, 'Неправильно выбрано время');
+                error++
             }
         } else {
             if (input.value === '') {
-                formAddError(input);
+                formAddError(input, '4');
                 error++;
             }
         }
     }
     return error;
 }
+
 // Все эти 3 функции сравнивают значение определенного поля по regex и отправляет bool-значение.
 function fullNameTest(input) {
     return (/^([А-ЯA-Z]|[А-ЯA-Z][\x27а-яa-z]{1,}|[А-ЯA-Z][\x27а-яa-z]{1,}-([А-ЯA-Z][\x27а-яa-z]{1,}|(оглы)|(кызы)))\040[А-ЯA-Z][\x27а-яa-z]{1,}(\040[А-ЯA-Z][\x27а-яa-z]{1,})?$/.test(input.value));
@@ -397,13 +405,64 @@ function phoneNumberTest(input) {
 function minDatepickerTest(input) {
     return /^(0?[1-9]|[12][0-9]|3[01])[.](0?[1-9]|1[012])[.]\d{4}$/.test(input.value)
 }
+//TODO Периписать Блок if-else на switch
+function TimeTest(input) {
+    let startTime = $('#startTimeHour').val() + `:` + $('#startTimeMin').val();
+    let endTime = input.value + `:` + $('#endTimeMin').val();
+    alert(startTime);
+    alert(endTime);
+    if (startTime === endTime) {
+        alert(1);
+        return false;
+    } else if ($('#startTimeHour').val() > input.value) {
+        alert(2);
+        return false;
+    } else if (startTime > endTime) {
+        alert(3);
+        return false;
+    } else {
+        return true;
+    }
+    /*switch (endTime) {
+        case 1:
+            if (startTime === endTime) {
+                alert(1);
+                return false;
+            }
+            break;
+        case 2:
+            if ($('#startTimeHour').val() > input.value) {
+                alert(2);
+                return false;
+            }
+            break;
+        case 3:
+            if (startTime > endTime) {
+                alert(3);
+                return false;
+            }
+            break;
+    }*/
+
+
+    /*if (startTime === endTime) {
+        return false;
+    } else if ($('#startTimeHour').val() > input.value) {
+        return false;
+    } else {
+        return true;
+    }*/
+}
+
 // Убирает красный бордер у поля
 function formRemoveError(input) {
     input.classList.remove('_error')
 }
+
 // Добавляет красный бордер полю
-function formAddError(input) {
+function formAddError(input, text) {
     input.classList.add('_error')
+    alert(text);
 }
 
 // Функция собирает проверенные данные после делает Ajax запрос
@@ -429,15 +488,24 @@ function recordPatient() {
             endTime: endTime,
         },
         dataType: 'JSON',
+        success: function (data) {
+            //submit.prop("disabled", false);
+            validateData(data);
+            //console.log(data);
+            //addRecordtoTable(patientDateRecord, startTime, endTime)
+        }
     });
+}
+
 // После как ajax произошел функция смотрит какая сегодня дата и какая у поля даты от модального окна
 // Если даты равны, то создается новая строка,которая будет содержать определенные данные модального окна
+function addRecordtoTable(patientDateRecord, startTime, endTime) {
     if (patientDateRecord === $('#datepicker').val()) {
         let tbody = $('#tbody');
         let tr = document.createElement('tr');
-        let record_id = 'record_id_'+startTime;
+        let record_id = 'record_id_' + startTime;
         tr.innerHTML = `<th scope="time row">
-       <button onclick="showRecordedCard('` + startTime + `','` + patientDateRecord+`','`+record_id+`')">` + startTime + '-' + endTime + `</button>
+       <button onclick="showRecordedCard('` + startTime + `','` + patientDateRecord + `','` + record_id + `')">` + startTime + '-' + endTime + `</button>
 </th>
     <td>` + patientName + ' ,' + patientLament + `</td>`;
         tr.setAttribute('class', 'ui-state-default');
@@ -454,8 +522,9 @@ function recordPatient() {
         $('.data_patient').val('');
     }
 }
+
 // Функция начинает действовать после нажатия на строку записанного пациента в таблице
-function showRecordedCard(time, date,record_id) {
+function showRecordedCard(time, date, record_id) {
     //Ajax запрос,чтобы получить данные данного пациента
     $.ajax({
         url: '../php/record_to_doctor/showRecordedCard.php',
@@ -476,17 +545,19 @@ function showRecordedCard(time, date,record_id) {
             $('#recordedEndTime').val(data[6]);
             $('#recordedLament').val(data[4]);
             $('#recordedCard').modal("show");
-            $('.record_for_delete').attr('data-id',record_id);
+            $('.record_for_delete').attr('data-id', record_id);
         },
         error: function (data) {
             alert(123456);
         }
     })
 }
+
 // Чтобы закрыть карточку записанного пациента
 function closeCard() {
     $('.recorded_data_patient').val(' ');
 }
+
 // Чтобы удалить карточка записанного пациента как в базе так и в html таблице
 function deleteCard(elem) {
     $.ajax({
@@ -511,13 +582,17 @@ function deleteCard(elem) {
     })
 }
 
-//Сортирует строки в таблице
-function sortRecords(){
+//
+function sortRecords() {
     let sortedRows = Array.from(tbody.rows)
         .slice(1)
         .sort((rowA, rowB) => rowA.cells[0].innerHTML > rowB.cells[0].innerHTML ? 1 : -1);
 
     tbody.tBodies[0].append(...sortedRows);
+}
+
+function validateData(data) {
+    if (data.status === '200' && data.error === '00') alert(123);
 }
 
 /*function insertData(patientName,lament,number,dateRecord,doctor,startTime,endTime) {
