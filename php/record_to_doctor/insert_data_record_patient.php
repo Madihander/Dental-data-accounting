@@ -1,4 +1,10 @@
 <?php
+//TODO В данный момент я отказываюсь от хеширования пароль,
+// так что надо будет создать свою шифр,который можно будет расшифровать
+
+//TODO https://habr.com/ru/post/146901/
+//Это где-то в будущем,надо будет сделать, потому что рынок самой программы только страны СНГ,наверное даже РК и РФ
+
 /*Коды ответа
  * status:200 - хорошо
  * status:203 - информация не авторитетна - не подходит,переделать
@@ -12,11 +18,14 @@
  * error:04 - ошибка,изменить доктора
  * error:05 - ошибка,изменить время начала
  * error:06 - ошибка,изменить время конца
- * error:07 - ошибка,изменить жалобу
+ * error:07 - ошибка, время начала = время конца
+ * error:08 - ошибка, время начала > время конца
+ * error:09 - ошибка,изменить жалобу
  *
  * Серверные ошибки
- * error:08 - ошибка,дупликат, есть человек,который записан на такое начальное время
- * error:010 - ошибка,неудалось добавить в таблицу
+ * error:010 - ошибка,дупликат, есть человек,который записан на такое начальное время
+ * error:011 - ошибка,неудалось добавить в таблицу
+ * error:012 - ошибка,неудалось найти в таблице запись
  *
  * Ошибки, если не удалось захешировать
  * error:019 - ошибка, неудалось захешировать ФИО
@@ -35,80 +44,80 @@
 require_once '../../includes/db.php';
 
 //Создаем Переменные
-//TODO вернуть $fullName = verificationFullName($_POST['name'] ?? null);
-//TODO вернуть $phoneNumber = verificationPhoneNumber($_POST['number'] ?? null);
-//TODO вернуть $dateRecord = verificationDateRecord($_POST['dateRecord'] ?? null);
-//TODO как дороботаешь regex у этих полей, добавляй их в функции как параметр
-//TODO вернуть $doctor = $_POST['doctor'];
-//TODO вернуть $startTime = $_POST['startTime'];
-//TODO вернуть $endTime = $_POST['endTime'];
-//TODO вернуть $lament = $_POST['lament'];
-$fullName =verificationFullName('Петров Петр Петрович');
-$phoneNumber = verificationPhoneNumber('+7(223)121-24-53');
-$dateRecord = verificationDateRecord('22.04.2021');
-$doctor = '4rthf';
-$startTime = '13:00';
-$endTime = '14:00';
-$lament = 'lament';
+
+$fullName = verificationFullName($_POST['name'] ?? null);
+$phoneNumber = verificationPhoneNumber($_POST['number'] ?? null);
+$dateRecord = verificationDateRecord($_POST['dateRecord'] ?? null);
+$doctor = verificationDoctor($_POST['doctor']);
+$startTime = verificationStartTime($_POST['startTime']);
+$endTime = verificationEndTime($_POST['endTime']);
+$lament = verificationLament($_POST['lament']);
+
 
 //Этот массив будет отправляется ajax
-$response = ['status' => 201, 'error' => null];
+$response = ['status' => '201', 'error' => null, 'id' => null];
 $data = [];
 //Проверка записан кто-либо на это время в этот день
 $checkResultDuplicate = checkDuplicatetime($startTime, $dateRecord);
 if (!is_null($checkResultDuplicate)) {
     $response['status'] = 400;
     if ($checkResultDuplicate = 'duplicate') {
-        $response['status'] = '203';
-        $response['error'] = '08';
-        print_r($response);
-        exit();
-        //exit(sendResponse());
+        $response = ['status' => '203', 'error' => '010'];
+        exit(sendResponse());
     }
 }
-dataHashing($fullName,$phoneNumber,$dateRecord);
+//Пока что не требуется
+//dataHashing($fullName, $phoneNumber);
+verificationTime($startTime, $endTime);
 
 global $pdo;
-$sql = "INSERT INTO patients.patients_record_data(fullName, lament, 
-phoneNumber, dateRecord, doctor,startTime,endTime)
-VALUES(:fullName, :lament, :phoneNumber, :dateRecord, :doctor,:startTime,:endTime)";
+$sql = "INSERT INTO record_patient(fullName,phoneNumber, dateRecord, attendingDoctor,startTime,endTime,lament)
+        VALUES(:fullName,:phoneNumber, :dateRecord, :attendingDoctor,:startTime,:endTime,:lament)";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([
-    'fullName' => $data['0'],
-    'phoneNumber' => $data['1'],
-    'dateRecord' => $data['2'],
-    'doctor' => $doctor,
+    'fullName' => $fullName,
+    'phoneNumber' => $phoneNumber,
+    'dateRecord' => $dateRecord,
+    'attendingDoctor' => $doctor,
     'startTime' => $startTime,
     'endTime' => $endTime,
     'lament' => $lament,
 ]);
-$response['status'] = '200';
-$response['error'] = '00';
-print_r($response);
-exit();
-//exit(sendResponse());
+$stmt = $pdo->prepare('SELECT id FROM record_patient WHERE fullName =:fullName AND dateRecord =:dateRecord
+                                AND startTime =:startTime AND endTime =:endTime');
+$stmt->execute([
+    'fullName' => $fullName,
+    'dateRecord' => $dateRecord,
+    'startTime' => $startTime,
+    'endTime' => $endTime,
+]);
+$row = $stmt->fetch(PDO::FETCH_LAZY);
+if ($row) {
+    $id = $row['id'];
+    $response = ['status' => '200', 'error' => '00', 'id' => $id];
+    exit(sendResponse());
+} else {
+    $response = ['status' => '200', 'error' => '011'];
+    exit(sendResponse());
+}
 
 //Отправляет ответ ajax
 function sendResponse()
 {
     global $response;
-    return json_encode($response);
+    echo json_encode($response);
 }
 
 //Проверяем ФИО
 function verificationFullName($login)
 {
     global $response;
-    $regex = '/^[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{0,}\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,}(\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,})?$/';
-    if (!isset($login) || empty($login)) {
-        $response['status'] = '203';
-        $response['error'] = '01';
-        print_r($response);
-        exit();
-        //exit(sendResponse());
+    $regex = '/[а-яА-ЯЁё]+\s+[а-яА-ЯЁё]+\s+[а-яА-ЯЁё]+/ m';
+    if (!isset($login) || empty($login) || !preg_match($regex, $login)) {
+        $response = ['status' => '203', 'error' => '01'];
+        exit(sendResponse());
     } else {
-        $response['status'] = '200';
-        $response['error'] = '00';
+        $response = ['status' => '200', 'error' => '00'];
         return $login;
     }
 }
@@ -117,13 +126,12 @@ function verificationFullName($login)
 function verificationPhoneNumber($number)
 {
     global $response;
-    if (!isset($number) || empty($number) || !preg_match('/^(\+)?(\(\d{2,3}\) ?\d|\d)(([ \-]?\d)|( ?\(\d{2,3}\) ?)){5,12}\d$/', $number)) {
-        $response['status'] = '203';
-        $response['error'] = '02';
+    $regex = '/^(\+)?(\(\d{2,3}\) ?\d|\d)(([ \-]?\d)|( ?\(\d{2,3}\) ?)){5,12}\d$/';
+    if (!isset($number) || empty($number) || !preg_match($regex, $number)) {
+        $response = ['status' => '203', 'error' => '02'];
         exit(sendResponse());
     } else {
-        $response['status'] = '200';
-        $response['error'] = '00';
+        $response = ['status' => '200', 'error' => '00'];
         return $number;
     }
 }
@@ -132,93 +140,82 @@ function verificationPhoneNumber($number)
 function verificationDateRecord($date)
 {
     global $response;
-    if (!isset($date) || empty($date) || !preg_match('/^(0?[1-9]|[12][0-9]|3[01])[.](0?[1-9]|1[012])[.]\d{4}$/', $date)) {
-        $response['status'] = '203';
-        $response['error'] = '03';
+    $regex = '/^(0?[1-9]|[12][0-9]|3[01])[.](0?[1-9]|1[012])[.]\d{4}$/';
+    if (!isset($date) || empty($date) || !preg_match($regex, $date)) {
+        $response = ['status' => '203', 'error' => '03'];
         exit(sendResponse());
     } else {
-        $response['status'] = '200';
-        $response['error'] = '00';
+        $response = ['status' => '200', 'error' => '00'];
         return $date;
     }
 }
 
-//TODO доделать regex для поля
 //Проверяем доктора
 function verificationDoctor($doctor)
 {
     global $response;
-    if (!isset($doctor) || empty($doctor) || !preg_match('regex', $doctor)) {
-        $response['status'] = '203';
-        $response['error'] = '04';
+    //$regex = '/[а-яА-ЯЁё]+\s+[а-яА-ЯЁё]+\s+[а-яА-ЯЁё]+/ m';
+    if (!isset($doctor) || empty($doctor) /*|| !preg_match($regex, $doctor)*/) {
+        $response = ['status' => '203', 'error' => '04'];
         exit(sendResponse());
     } else {
-        $response['status'] = '200';
-        $response['error'] = '00';
+        $response = ['status' => '200', 'error' => '00'];
         return $doctor;
     }
 }
 
-//TODO доделать regex для поля начальное время
 //Проверяем дату начальное время
 function verificationStartTime($start)
 {
     global $response;
-    if (!isset($start) || empty($start) || !preg_match('regex', $start)) {
-        $response['status'] = '203';
-        $response['error'] = '05';
+    $regex = '/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/';
+    if (!isset($start) || empty($start) || !preg_match($regex, $start)) {
+        $response = ['status' => '203', 'error' => '05'];
         exit(sendResponse());
     } else {
-        $response['status'] = '200';
-        $response['error'] = '00';
+        $response = ['status' => '200', 'error' => '00'];
         return $start;
     }
 }
 
-//TODO доделать regex для поля конеченое время
 //Проверяем дату конечное время
 function verificationEndTime($end)
 {
     global $response;
-    if (!isset($end) || empty($end) || !preg_match('regex', $end)) {
-        $response['status'] = '203';
-        $response['error'] = '06';
+    $regex = '/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/';
+    if (!isset($end) || empty($end) || !preg_match($regex, $end)) {
+        $response = ['status' => '203', 'error' => '06'];
         exit(sendResponse());
     } else {
-        $response['status'] = '200';
-        $response['error'] = '00';
+        $response = ['status' => '200', 'error' => '00'];
         return $end;
     }
 }
 
-//TODO доделать regex для поля жалоба
 //Проверяем жалобу
 function verificationLament($lament)
 {
     global $response;
-    if (!isset($lament) || empty($lament) || !preg_match('regex', $lament)) {
-        $response['status'] = '203';
-        $response['error'] = '07';
+    if (!isset($lament) || empty($lament)) {
+        $response = ['status' => '203', 'error' => '09'];
         exit(sendResponse());
     } else {
-        $response['status'] = '200';
-        $response['error'] = '00';
+        $response = ['status' => '200', 'error' => '00'];
         return $lament;
     }
 }
 
 // Хешируем данные
-function dataHashing($fullName,$phoneNumber,$dateRecord)
+/* Не требуется.
+function dataHashing($fullName, $phoneNumber)
 {
     global $data;
     $fullName = password_hash($fullName, PASSWORD_BCRYPT);
-    $phoneNumber = password_hash($phoneNumber,PASSWORD_BCRYPT);
-    $dateRecord = password_hash($dateRecord,PASSWORD_BCRYPT);
-    array_push($data,$fullName,$phoneNumber,$dateRecord);
-    print_r($data);
+    $phoneNumber = password_hash($phoneNumber, PASSWORD_BCRYPT);
+    array_push($data, $fullName, $phoneNumber);
     return $data;
 }
-
+*/
 //Проверка на дубликат записи на данное время
 function checkDuplicatetime($time, $date)
 {
@@ -230,3 +227,19 @@ function checkDuplicatetime($time, $date)
     if (count($result) == 0) return null;
     if (count($result) == 2) return 'duplicate';
 }
+
+function verificationTime($startTime, $endTime)
+{
+    global $response;
+    if (strcmp($startTime, $endTime) === 0) {
+        $response = ['status' => '203', 'error' => '07'];
+        exit(sendResponse());
+    } elseif ($startTime > $endTime) {
+        $response = ['status' => '203', 'error' => '08'];
+        exit(sendResponse());
+    } else {
+        $response = ['status' => '200', 'error' => '00'];
+        return true;
+    }
+}
+
