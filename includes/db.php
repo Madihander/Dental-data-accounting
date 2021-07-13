@@ -7,10 +7,11 @@
  */
 
 $host = 'localhost';
-$db = 'electronic_journal_kz';
+$db   = 'avior_mk';
 $user = 'root';
 $pass = 'root';
 $charset = 'utf8';
+
 
 // специальнгая ссылка для подключения к MySQL базе данных
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
