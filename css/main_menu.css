@@ -1,0 +1,37 @@
+
+a:hover {
+    text-decoration: none;
+}
+
+.over_view {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.floating_button {
+    text-decoration: none;
+    display: inline-block;
+    line-height: 1.5625em;
+    font-size: 1.5em;
+    text-align: center;
+    font-weight: 500;
+    color: #959595;
+    /*  box-shadow: 0 0.5em 0.937em rgba(0, 0, 0, 0.1);*/
+    transition: .2s ease;
+}
+
+.floating_button:hover {
+    border-top: 2px solid #d45b60;
+    border-bottom: 2px solid #d45b60;
+    font-weight: 600;
+    color: #d45a5f;
+}
+.column {
+    border: 3px solid black;
+    display: inline-block;
+    width: 40%;
+}
