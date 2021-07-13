@@ -1,0 +1,44 @@
+body, html {
+    height: 100%;
+}
+
+body {
+    background-image: url("../img/Shiny Overlay.svg");
+}
+
+form {
+    background-color: #ffffff;
+    border: 2px solid black;
+    border-radius: 7px;
+}
+
+h4 {
+    color: #ca0b66;;
+}
+
+.btn-purple {
+    border: 1px solid #6614d3;
+}
+
+.btn-orange {
+    border: 1px solid #EB6500;
+}
+
+.btn-red {
+    border: 1px solid #ca0b66;
+}
+
+.btn-orange:hover {
+    box-shadow: 1px 1px 1px 1px #EB6500;
+    background-color: #f7f7f7;
+}
+
+.btn-purple:hover {
+    box-shadow: 1px 1px 1px 1px #6614d3;
+    background-color: #f7f7f7;
+}
+
+.btn-red:hover {
+    box-shadow: 1px 1px 1px 1px #ca0b66;
+    background-color: #f7f7f7;;
+}
