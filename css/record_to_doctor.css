@@ -1,83 +1,76 @@
+/*https://colors.dopely.top/color-mixer/7e32d0-15-f9cd5c-15-27f2c6-17-f65334-17-08a3ff-19-0fd630-17
+*/
+body {
+    height: 100vh;
+    width: 100%;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1920' height='1080' preserveAspectRatio='none' viewBox='0 0 1920 1080'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1908%26quot%3b)' fill='none'%3e%3crect width='1920' height='1080' x='0' y='0' fill='url(%23SvgjsLinearGradient1909)'%3e%3c/rect%3e%3cpath d='M0 0L846.15 0L0 523.03z' fill='rgba(255%2c 255%2c 255%2c .1)'%3e%3c/path%3e%3cpath d='M0 523.03L846.15 0L1140.6599999999999 0L0 698.92z' fill='rgba(255%2c 255%2c 255%2c .075)'%3e%3c/path%3e%3cpath d='M0 698.92L1140.6599999999999 0L1299.9899999999998 0L0 903.22z' fill='rgba(255%2c 255%2c 255%2c .05)'%3e%3c/path%3e%3cpath d='M0 903.22L1299.9899999999998 0L1478.2699999999998 0L0 948.46z' fill='rgba(255%2c 255%2c 255%2c .025)'%3e%3c/path%3e%3cpath d='M1920 1080L1013.78 1080L1920 612.25z' fill='rgba(0%2c 0%2c 0%2c .1)'%3e%3c/path%3e%3cpath d='M1920 612.25L1013.78 1080L603.47 1080L1920 280.61z' fill='rgba(0%2c 0%2c 0%2c .075)'%3e%3c/path%3e%3cpath d='M1920 280.61L603.47 1080L525.09 1080L1920 273.71000000000004z' fill='rgba(0%2c 0%2c 0%2c .05)'%3e%3c/path%3e%3cpath d='M1920 273.71000000000004L525.0900000000001 1080L428.3000000000001 1080L1920 263.68000000000006z' fill='rgba(0%2c 0%2c 0%2c .025)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1908'%3e%3crect width='1920' height='1080' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='89.06%25' y1='119.44%25' x2='10.94%25' y2='-19.44%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1909'%3e%3cstop stop-color='rgba(249%2c 205%2c 92%2c 0.99)' offset='0.19'%3e%3c/stop%3e%3cstop stop-color='rgba(133%2c 19%2c 255%2c 1)' offset='0.49'%3e%3c/stop%3e%3cstop stop-color='rgba(39%2c 242%2c 198%2c 1)' offset='0.81'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
+    backdrop-filter: blur(30px);
+}
 
-input {
-    width: 90%;
-    height: 45%;
+.glassEffect {
+    background: white;
+    min-height: 80vh;
+    width: 95%;
+    background: linear-gradient(to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+    );
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
 }
-select{
+
+.table_patient {
+    background: white;
+    background: linear-gradient(to left top,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.5));
+    border-radius: 1rem;
+    box-shadow: 6px 6px 20px rgba(122, 122, 122, 0.2);
+    backdrop-filter: blur(4px);
+}
+
+.fields {
+    width: 70%;
+    height: 30px;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 18px;
+    font-weight: 400;
+
+}
+
+.fields:focus-visible {
+    outline: 0;
+    border-color: #6614d3;
+}
+
+.field_label {
     width: 40%;
-    height:40%;
+    margin-bottom: 4px;
+}
+
+.selectionField {
+    width: 40%;
     text-align: center;
+    border-radius: 4px;
 }
-th,td {
-    color:white;
-    font-size: 20px;
-    text-align: left
+
+.selectionField:focus-visible {
+    outline: 0;
+    border-color: #6614d3;
 }
-.red{
-    border-right:1px red solid
+
+
+.red {
+    border-right: 1px red solid
 }
-.black{
+
+.black {
     border-bottom: 1px red solid;
     color: white;
 }
-.table_patient{
-    background-color: #00b49d;
-    border-radius: 8px;
-    box-shadow: 20px 20px 15px 8px rgba(0,0,0,0.7);
-}
 
-.floating_input{
-    border-radius: 5px;
-    box-shadow: 10px 10px 20px 5px rgba(0,0,0,0.7);
-    transition: .3s;
-}
-.floating_input:hover{
-    background: #fc7400;
-    box-shadow: 0 0 30px #ffa001;
-    color: #ffffff;
-    transform: translateY(-3px);
-}
-
-.floating_button{
-    text-decoration: none;
-    display: inline-block;
-    line-height: 1.5625em;
-    border-radius: .625em;
-    font-size: 1.125em;
-    text-align: center;
-    font-weight: 400;
-    color: #212121;
-    background: #007563;
-    box-shadow: 0 0.5em 0.937em rgba(0,0,0,0.1);
-    transition: .3s;
-}
-.floating_button:hover{
-    background: #fc7400;
-    box-shadow: 0 0 30px #ffa001;
-    color: #ffffff;
-    transform: translateY(-3px);
-}
-
-.day_indic {
-    text-align: center;
-    background-color: #fc7400;
-    color: #ffffff;
-    height: 10em;
-    border-radius: 8px;
-    box-shadow: 20px 20px 15px 8px rgba(0,0,0,0.7);
-}
-#datepicker{
-    box-shadow: 20px 20px 15px 8px rgba(0,0,0,0.7);
-    border-radius: 8px;
-}
-.ui-datepicker-trigger {
-    margin-left: 5px;
-    position: relative;
-    top: 3px;
-    cursor: pointer;
-}
-
-._error{
+._error {
     border: 2px solid red;
 
 }
