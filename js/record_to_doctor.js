@@ -1,10 +1,17 @@
-let form = $('#form');
+let form = $('#form')
 //Эта Функция нужна для того чтобы перемещать строки в таблице пациентов
-$(function () {
+/*$(function () {
     $('#tbody').sortable({
         connectWith: ".connectedSortable"
     }).disableSelection();
 });
+*/
+//Выставляем сегодняшнию дату в значение календаря
+
+$(function () {
+    let date = new Date().toLocaleDateString();
+    $('#datepicker_value').val(date);
+})
 //Показывать иконку каледаря в модальном окне
 $(function () {
     $("#minDatepicker").datepicker({
@@ -20,15 +27,34 @@ $(function () {
 });
 
 $(function () {
-    $("#datepicker").datepicker({
-        minDate: 0,
-        onSelect: function (date) {
-            $("#datepicker_value").val(date)
-        }
-    });
-    $("#datepicker").datepicker("setDate", $("#datepicker_value").val())
-});
+    $("#datepicker").datepicker();
 
+    $("#datepicker").val();
+
+    $("#datepicker").on("change", function () {
+        var selected = $(this).val();
+        showRecorededPatients(selected);
+    });
+});
+/*
+$(function () {
+    $('#datepicker').datepicker({
+        onSelect: function (dateText, inst) {
+            $.datepicker.formatDate("dd.mm.yy",$(this).datepicker("getDate"));
+            /*
+            let currentDate = new Date().toLocaleDateString();
+            console.log(currentDate);
+            console.log(123456);
+            if ($('#datepicker_value').val() !== currentDate.val()) {
+                showRecorededPatients();
+            } else {
+                alert('Current');
+            }
+        }
+    })
+})
+*/
+new Tablesort(document.getElementById('table_patients'));
 //newDay - День - цифра
 // newMonth - Месяц
 //newDay_of_week - день недели
@@ -190,6 +216,35 @@ function writeMonth(Month) {
     $("#month_id").text(Month);
 }
 
+function showRecorededPatients(date) {
+    let chosenDate = date;
+    $('.tr_table_patient').remove();
+    console.log(chosenDate);
+    $.ajax({
+        url: '../php/record_to_doctor/showRecordedPatientOnThisDay.php',
+        type: 'POST',
+        data: {
+            date: chosenDate
+        },
+        dataType: 'JSON',
+        success: function (data) {
+            data = JSON.parse(JSON.stringify(data))
+            let table_patients = $('#tbody');
+            for (let key in data) {
+                console.log(data[key]);
+                let block = `<tr class="tr_table_patient">
+                        <td><a href="#">${data[key].startTime} - ${data[key].endTime}</a></td>
+                        <td>${data[key].fullName},${data[key].lament}</td>
+                    </tr>`
+                table_patients.append(block)
+            }
+        },
+        error: function () {
+            console.log(456);
+        }
+    })
+}
+
 //Эта Функция нужна для того чтобы,например выбрали начало приема 12 то уже в поле выбора конца приема не будет 9,10,11
 // , это для модального онка
 function hideOption() {
@@ -344,13 +399,15 @@ function hideOption() {
 // Эта функция которая, запускает функцию проверки, если ошибок словленных в formValidate > 0 то alert,
 // иначе отправляем данные
 function formSend(e) {
-    let error = formValidate(form)
-    if (error === 0) {
-        alert('SUCCESS');
-        recordPatient();
-    } else {
-        alert('DANGER');
-    }
+    recordPatient();
+    /*TODO потом вернуть
+         let error = formValidate(form)
+      if (error === 0) {
+          alert('SUCCESS');
+          recordPatient();
+      } else {
+          alert('DANGER');
+      }*/
 }
 
 // Функция проверяющие на заполнение и regex поля в модальном окне
@@ -405,6 +462,7 @@ function phoneNumberTest(input) {
 function minDatepickerTest(input) {
     return /^(0?[1-9]|[12][0-9]|3[01])[.](0?[1-9]|1[012])[.]\d{4}$/.test(input.value)
 }
+
 //TODO Периписать Блок if-else на switch
 function TimeTest(input) {
     let startTime = $('#startTimeHour').val() + `:` + $('#startTimeMin').val();
@@ -461,7 +519,7 @@ function formRemoveError(input) {
 
 // Добавляет красный бордер полю
 function formAddError(input, text) {
-    input.classList.add('_error')
+    $(input).classList.add('_error')
     alert(text);
 }
 
@@ -489,27 +547,55 @@ function recordPatient() {
         },
         dataType: 'JSON',
         success: function (data) {
+            alert(13333);
             //submit.prop("disabled", false);
-            validateData(data);
+            if (data.status === '200' && data.error === '00' && data.id !== 0) {
+                alert('Пациент Успешно Записан');
+                addRecordtoTable(patientName, patientLament, patientDateRecord, startTime, endTime, data.id);
+            } else if (data.status === '203' && data.error === '01') {
+                alert(`Перепишите ФИО ,он не соответсвует стандарту`);
+            } else if (data.status === '203' && data.error === '02') {
+                alert(`Перепишите Номер телефона, он не соответствует стандарту`);
+            } else if (data.status === '203' && data.error === '03') {
+                alert(`Перепишите Дату записи, она не соответствует стандарту`);
+            } else if (data.status === '203' && data.error === '04') {
+                alert(`Перепишите Доктора, он не соответствует стандарту`);
+            } else if (data.status === '203' && data.error === '05') {
+                alert(`Перепишите начальное время записи, она не соответствует стандарту`);
+            } else if (data.status === '203' && data.error === '06') {
+                alert(`Перепишите конечное время записи, она не соответствует стандарту`);
+            } else if (data.status === '203' && data.error === '07') {
+                alert(`Перепишите время, оно не соответствует стандарту`);
+            } else if (data.status === '203' && data.error === '08') {
+                alert(`Перепишите время, оно не соответствует стандарту`);
+            } else if (data.status === '203' && data.error === '09') {
+                alert(`Перепишите жалобу, она не соответствует стандарту`);
+            } else if (data.status === '203' && data.error === '010') {
+                alert(`Перепишите жалобу, она не соответствует стандарту`);
+            }
             //console.log(data);
             //addRecordtoTable(patientDateRecord, startTime, endTime)
+        },
+        error: function (data) {
+            alert(123333333333333);
         }
     });
 }
 
 // После как ajax произошел функция смотрит какая сегодня дата и какая у поля даты от модального окна
 // Если даты равны, то создается новая строка,которая будет содержать определенные данные модального окна
-function addRecordtoTable(patientDateRecord, startTime, endTime) {
+function addRecordtoTable(patientName, patientLament, patientDateRecord, startTime, endTime, patient_id) {
+    alert(123);
     if (patientDateRecord === $('#datepicker').val()) {
         let tbody = $('#tbody');
         let tr = document.createElement('tr');
-        let record_id = 'record_id_' + startTime;
+        alert(patient_id);
         tr.innerHTML = `<th scope="time row">
-       <button onclick="showRecordedCard('` + startTime + `','` + patientDateRecord + `','` + record_id + `')">` + startTime + '-' + endTime + `</button>
+       <button onclick="showRecordedCard('` + startTime + `','` + patientDateRecord + `','` + patient_id + `')">` + startTime + '-' + endTime + `</button>
 </th>
     <td>` + patientName + ' ,' + patientLament + `</td>`;
         tr.setAttribute('class', 'ui-state-default');
-        tr.setAttribute('id', record_id);
+        tr.setAttribute('id', patient_id);
         tbody.append(tr);
 
         $('#recordingCard').modal("hide");
@@ -530,6 +616,7 @@ function showRecordedCard(time, date, record_id) {
         url: '../php/record_to_doctor/showRecordedCard.php',
         method: 'POST',
         data: {
+            id: record_id,
             time: time,
             date: date,
         },
@@ -537,13 +624,13 @@ function showRecordedCard(time, date, record_id) {
         // Выводим данные в модальном окне
         success: function (data) {
             console.log(data);
-            $('#recordedFullName').val(data[0]);
+            $('#recordedFullName').val(data[1]);
             $('#recordedPhoneNumber').val(data[2]);
             $('#recordedMinDatepicker').val(data[3]);
-            $('#recordedDoctor').val(data[1]);
+            $('#recordedDoctor').val(data[4]);
             $('#recordedStartTime').val(data[5]);
             $('#recordedEndTime').val(data[6]);
-            $('#recordedLament').val(data[4]);
+            $('#recordedLament').val(data[7]);
             $('#recordedCard').modal("show");
             $('.record_for_delete').attr('data-id', record_id);
         },
@@ -564,9 +651,7 @@ function deleteCard(elem) {
         url: '../php/record_to_doctor/deleteRecordedCard.php',
         method: 'POST',
         data: {
-            fullName: $('#recordedFullName').val(),
-            date: $('#recordedMinDatepicker').val(),
-            time: $('#recordedStartTime').val(),
+            id: elem,
         },
         dataType: 'JSON',
         success: function (data) {
@@ -582,7 +667,8 @@ function deleteCard(elem) {
     })
 }
 
-//
+
+/*
 function sortRecords() {
     let sortedRows = Array.from(tbody.rows)
         .slice(1)
@@ -590,9 +676,45 @@ function sortRecords() {
 
     tbody.tBodies[0].append(...sortedRows);
 }
-
-function validateData(data) {
-    if (data.status === '200' && data.error === '00') alert(123);
+*/
+function validateData(data, patientDateRecord, startTime, endTime) {
+    if (data.status === '200' && data.error === '00') {
+        alert('Пациент Успешно Записан');
+        addRecordtoTable(patientDateRecord, startTime, endTime);
+    } else if (data.status === '203' && data.error === '01') {
+        formAddError($('#fullName'), `Перепишите ФИО ,он не соответсвует стандарту`)
+    } else if (data.status === '203' && data.error === '02') {
+        formAddError($('#phoneNumber'), `Перепишите Номер телефона, он не соответствует стандарту`);
+    } else if (data.status === '203' && data.error === '03') {
+        formAddError($('#phoneNumber'), `Перепишите Дату записи, она не соответствует стандарту`);
+    }
+    /*switch (data) {
+        case 0:
+            if (data.status === '200' && data.error === '00') {
+                alert('Пациент Успешно Записан');
+                addRecordtoTable(patientDateRecord, startTime, endTime);
+            }
+            break;
+        case 1:
+            if (data.status === '203' && data.error === '01') {
+                formAddError($('#fullName'), `Перепишите ФИО ,он не соответсвует стандарту`)
+            }
+            break;
+        case 2:
+            if (data.status === '203' && data.error === '02') {
+                formAddError($('#phoneNumber'), `Перепишите Номер телефона, он не соответствует стандарту`);
+            }
+            break;
+        case 3:
+            if (data.status === '203' && data.error === '03') {
+                formAddError($('#phoneNumber'), `Перепишите Дату записи, она не соответствует стандарту`);
+            }
+            break;
+        case 4:
+            if (data.status === '203' && data.error === '04') {
+                formAddError($('#phoneNumber'), `Перепишите Доктора, он не соответствует стандарту`);
+            }
+    }*/
 }
 
 /*function insertData(patientName,lament,number,dateRecord,doctor,startTime,endTime) {
