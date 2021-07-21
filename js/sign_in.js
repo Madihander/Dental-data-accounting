@@ -21,7 +21,7 @@ $('#auth_btn').click(function (e) {
             success: function (data) {
                 if (data.status === '200' && data.error === '00') {
                     alert("Запрос принят и успешно обработан");
-                    document.location.href="http://eljor.kz/journals/main_menu.php"
+                    document.location.href="http://dental-data-accounting.kz/journals/main_menu.php"
                     console.log(data);
                 } else {
                     alert("Запрос принят, но неудачно обработан");
