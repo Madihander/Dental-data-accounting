@@ -73,19 +73,19 @@ https://itchief.ru/bootstrap/modal-->
                         <div class="col-2"></div>
                         <div class="col-5 mt-2">
                             <label for="phoneNumber" class="field_label">Номера телефона</label>
-                            <input id="phoneNumber" class="fields" type="text" required autocomplete="off">
+                            <input id="phoneNumber" class="fields _req _phoneNumber" type="text" required autocomplete="off">
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-5">
                             <label for="minDatepicker" class="field_label">Дата записи</label>
-                            <input id="minDatepicker" class="fields" type="text" required autocomplete="off">
+                            <input id="minDatepicker" class="fields _req _minDatepicker" type="text" required autocomplete="off">
                         </div>
                         <div class="col-2"></div>
                         <div class="col-5">
                             <label class="field_label" for="doctor">Лечущий врач</label>
-                            <select id="doctor" class="fields">
+                            <select id="doctor" class="fields _req _doctor">
                                 <option>_____</option>
                                 <option value="Кажибеков Нуржан Султанович">Кажибеков Нуржан Султанович</option>
                                 <option value="Кажибеков Мади Нуржанович">Кажибеков Мади Нуржанович</option>
@@ -96,7 +96,7 @@ https://itchief.ru/bootstrap/modal-->
                     <div class="row">
                         <div class="col-md-2">
                             <label for="startTimeHour">Время начала</label>
-                            <select class="selectionField _startTimeHour" id="startTimeHour">
+                            <select class="selectionField _startTimeHour _req" id="startTimeHour">
                                 <option disabled value="">__</option>
                                 <option value="09">09</option>
                                 <option value="10">10</option>
@@ -111,7 +111,7 @@ https://itchief.ru/bootstrap/modal-->
                                 <option value="19">19</option>
                             </select>
                             :
-                            <select class="selectionField  _startTimeMin" id="startTimeMin">
+                            <select class="selectionField  _startTimeMin _req" id="startTimeMin">
                                 <option disabled value="">__</option>
                                 <option value="00">00</option>
                                 <option value="05">05</option>
@@ -146,7 +146,7 @@ https://itchief.ru/bootstrap/modal-->
                                 <option id="endHour19" value="19">19</option>
                             </select>
                             :
-                            <select class="selectionField  _endTimeMin" id="endTimeMin">
+                            <select class="selectionField  _endTimeMin _req" id="endTimeMin">
                                 <option disabled value="">__</option>
                                 <option value="00">00</option>
                                 <option value="05">05</option>
