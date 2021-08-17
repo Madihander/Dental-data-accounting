@@ -38,18 +38,7 @@ https://itchief.ru/bootstrap/modal-->
                 </tr>
                 </thead>
                 <tbody id="tbody">
-                <tr class="tr_table_patient">
-                    <td><a href="#">10:00 - 11:00</a></td>
-                    <td>Кажибеков Мади Нуржанович</td>
-                </tr>
-                <tr class="tr_table_patient">
-                    <td><a href="#">10:00 - 11:00</a></td>
-                    <td>Кажибеков Мади Нуржанович</td>
-                </tr>
-                <tr class="tr_table_patient">
-                    <td><a href="#">10:00 - 11:00</a></td>
-                    <td>Кажибеков Мади Нуржанович</td>
-                </tr>
+
                 </tbody>
             </table>
         </div>
@@ -67,26 +56,31 @@ https://itchief.ru/bootstrap/modal-->
                     <div class="row mb-3">
                         <div class="col-5  mt-2">
                             <label for="fullName" class="field_label">ФИО</label>
-                            <input id="fullName" class="fields" type="text" required autocomplete="off"
+                            <input id="fullName" class="fields _req _fullName" type="text" required autocomplete="off"
                                    placeholder="Петров Петр Петрович">
+                            <p id="errorFullName"></p>
                         </div>
                         <div class="col-2"></div>
                         <div class="col-5 mt-2">
                             <label for="phoneNumber" class="field_label">Номера телефона</label>
-                            <input id="phoneNumber" class="fields _req _phoneNumber" type="text" required autocomplete="off">
+                            <input id="phoneNumber" class="fields _req _phoneNumber" type="text" required
+                                   autocomplete="off">
+                            <p id="errorPhoneNumber"></p>
+
                         </div>
                     </div>
 
                     <div class="row mb-3">
                         <div class="col-5">
                             <label for="minDatepicker" class="field_label">Дата записи</label>
-                            <input id="minDatepicker" class="fields _req _minDatepicker" type="text" required autocomplete="off">
+                            <input id="minDatepicker" class="fields _req _minDatepicker" type="text" required
+                                   autocomplete="off">
+                            <p id="errorDatepicker"></p>
                         </div>
                         <div class="col-2"></div>
                         <div class="col-5">
                             <label class="field_label" for="doctor">Лечущий врач</label>
-                            <select id="doctor" class="fields _req _doctor">
-                                <option>_____</option>
+                            <select id="doctor" class="fields _req">
                                 <option value="Кажибеков Нуржан Султанович">Кажибеков Нуржан Султанович</option>
                                 <option value="Кажибеков Мади Нуржанович">Кажибеков Мади Нуржанович</option>
                             </select>
@@ -127,6 +121,7 @@ https://itchief.ru/bootstrap/modal-->
                                 <option value="55">55</option>
                                 <option value="60">60</option>
                             </select>
+                            <p id="errorTime"></p>
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-2">
@@ -169,6 +164,7 @@ https://itchief.ru/bootstrap/modal-->
                         <div class="col-md-5">
                             <label for="lament" class="field_label">Причина обращения</label>
                             <input class="fields floating_input _req _lament" id="lament">
+                            <p id="errorLament"></p>
                         </div>
                     </div>
                 </form>
@@ -248,11 +244,13 @@ https://itchief.ru/bootstrap/modal-->
 </div>
 <!-------Js------->
 <script src="../jquery/jquery.js"></script>
-<script src="../js/bootstrap.js"></script>
 <script src="../js/popper.js"></script>
+<script src="../js/bootstrap.js"></script>
 <script src="../libs/tablesort.js"></script>
 
-<script src=../js/record_to_doctor.js></script>
+<script src=../js/record_to_doctor/record_to_doctor.js></script>
+<script src="../js/record_to_doctor/RD_validation.js"></script>
+<script src="../js/record_to_doctor/RD_datepicker.js"></script>
 <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
 <script src="../jquery/jquery-ui.js"></script>
 <script src="../jquery/jquery.maskedinput.js"></script>
