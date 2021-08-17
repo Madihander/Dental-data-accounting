@@ -5,7 +5,7 @@ $id = $_POST['id'];
 $time = $_POST['time'];
 $date = $_POST['date'];
 global $pdo;
-$response = [];
+$response = ['status' => '201', 'error' => null];
 //    $sql = "SELECT * FROM patients.patients_record_data WHERE startTime = :startTime AND dateRecord  =:dateRecord";
 $stmt = $pdo->prepare('SELECT * FROM record_patient WHERE id =:id AND startTime = :startTime AND dateRecord  =:dateRecord');
 $stmt->execute(['id' => $id, 'startTime' => $time, 'dateRecord' => $date]);
@@ -15,7 +15,7 @@ if ($row) {
         $row['attendingDoctor'], $row['startTime'], $row['endTime'], $row['lament']);
     exit(sendResponse());
 } else {
-    $response = ['status' => 203, 'error' => 01];
+    $response = ['status' => '203', 'error' => '01'];
     echo 123;
     exit(sendResponse());
 }
