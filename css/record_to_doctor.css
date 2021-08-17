@@ -6,7 +6,6 @@ body {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1920' height='1080' preserveAspectRatio='none' viewBox='0 0 1920 1080'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1908%26quot%3b)' fill='none'%3e%3crect width='1920' height='1080' x='0' y='0' fill='url(%23SvgjsLinearGradient1909)'%3e%3c/rect%3e%3cpath d='M0 0L846.15 0L0 523.03z' fill='rgba(255%2c 255%2c 255%2c .1)'%3e%3c/path%3e%3cpath d='M0 523.03L846.15 0L1140.6599999999999 0L0 698.92z' fill='rgba(255%2c 255%2c 255%2c .075)'%3e%3c/path%3e%3cpath d='M0 698.92L1140.6599999999999 0L1299.9899999999998 0L0 903.22z' fill='rgba(255%2c 255%2c 255%2c .05)'%3e%3c/path%3e%3cpath d='M0 903.22L1299.9899999999998 0L1478.2699999999998 0L0 948.46z' fill='rgba(255%2c 255%2c 255%2c .025)'%3e%3c/path%3e%3cpath d='M1920 1080L1013.78 1080L1920 612.25z' fill='rgba(0%2c 0%2c 0%2c .1)'%3e%3c/path%3e%3cpath d='M1920 612.25L1013.78 1080L603.47 1080L1920 280.61z' fill='rgba(0%2c 0%2c 0%2c .075)'%3e%3c/path%3e%3cpath d='M1920 280.61L603.47 1080L525.09 1080L1920 273.71000000000004z' fill='rgba(0%2c 0%2c 0%2c .05)'%3e%3c/path%3e%3cpath d='M1920 273.71000000000004L525.0900000000001 1080L428.3000000000001 1080L1920 263.68000000000006z' fill='rgba(0%2c 0%2c 0%2c .025)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1908'%3e%3crect width='1920' height='1080' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='89.06%25' y1='119.44%25' x2='10.94%25' y2='-19.44%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1909'%3e%3cstop stop-color='rgba(249%2c 205%2c 92%2c 0.99)' offset='0.19'%3e%3c/stop%3e%3cstop stop-color='rgba(133%2c 19%2c 255%2c 1)' offset='0.49'%3e%3c/stop%3e%3cstop stop-color='rgba(39%2c 242%2c 198%2c 1)' offset='0.81'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
     backdrop-filter: blur(30px);
 }
-
 .glassEffect {
     background: white;
     min-height: 80vh;
@@ -18,7 +17,6 @@ body {
     border-radius: 4px;
     backdrop-filter: blur(4px);
 }
-
 .table_patient {
     background: white;
     background: linear-gradient(to left top,
@@ -31,48 +29,44 @@ body {
 
 .fields {
     width: 70%;
-    height: 30px;
+    line-height: 34px;
     border: 1px solid black;
     border-radius: 4px;
-    font-size: 18px;
+    font-size: 21px;
     font-weight: 400;
 
 }
-
 .fields:focus-visible {
     outline: 0;
     border-color: #6614d3;
 }
-
 .field_label {
     width: 40%;
     margin-bottom: 4px;
 }
-
+.field_block {
+    width: 70%;
+    height: 50%;
+}
 .selectionField {
     width: 40%;
     text-align: center;
     border-radius: 4px;
 }
-
 .selectionField:focus-visible {
     outline: 0;
     border-color: #6614d3;
 }
-
-
-.red {
-    border-right: 1px red solid
+.error_message{
+    font-size: 16px;
+    color:rgb(246,52,52) ;
+    border-bottom: rgb(246,52,52);
 }
-
-.black {
-    border-bottom: 1px red solid;
-    color: white;
+.valid{
+    border-color: rgb(39,242,120);
 }
-
-._error {
-    border: 2px solid red;
-
+.invalid{
+    border-color:rgb(246,52,52) ;
 }
 
 
