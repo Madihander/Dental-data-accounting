@@ -1,23 +1,102 @@
-/*body{background-color: #BBDEFB;}*/
-p{
+body {
+    height: 100vh;
+    width: 100%;
+    /*background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1920' height='1080' preserveAspectRatio='none' viewBox='0 0 1920 1080'%3e%3cg mask='url(%26quot%3b%23SvgjsMask1868%26quot%3b)' fill='none'%3e%3crect width='1920' height='1080' x='0' y='0' fill='url(%23SvgjsLinearGradient1869)'%3e%3c/rect%3e%3cpath d='M0 0L545.87 0L0 173.81z' fill='rgba(255%2c 255%2c 255%2c .1)'%3e%3c/path%3e%3cpath d='M0 173.81L545.87 0L804.3299999999999 0L0 523.27z' fill='rgba(255%2c 255%2c 255%2c .075)'%3e%3c/path%3e%3cpath d='M0 523.27L804.3299999999999 0L1310.27 0L0 706.97z' fill='rgba(255%2c 255%2c 255%2c .05)'%3e%3c/path%3e%3cpath d='M0 706.97L1310.27 0L1326.12 0L0 711.2z' fill='rgba(255%2c 255%2c 255%2c .025)'%3e%3c/path%3e%3cpath d='M1920 1080L1464.46 1080L1920 802.25z' fill='rgba(0%2c 0%2c 0%2c .1)'%3e%3c/path%3e%3cpath d='M1920 802.25L1464.46 1080L1208.35 1080L1920 549.58z' fill='rgba(0%2c 0%2c 0%2c .075)'%3e%3c/path%3e%3cpath d='M1920 549.58L1208.35 1080L630.3599999999999 1080L1920 373.28000000000003z' fill='rgba(0%2c 0%2c 0%2c .05)'%3e%3c/path%3e%3cpath d='M1920 373.28L630.3599999999999 1080L508.6799999999999 1080L1920 193.11999999999998z' fill='rgba(0%2c 0%2c 0%2c .025)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask1868'%3e%3crect width='1920' height='1080' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='10.94%25' y1='-19.44%25' x2='89.06%25' y2='119.44%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient1869'%3e%3cstop stop-color='rgba(219%2c 30%2c 109%2c 0.99)' offset='0.31'%3e%3c/stop%3e%3cstop stop-color='rgba(98%2c 221%2c 231%2c 1)' offset='0.61'%3e%3c/stop%3e%3cstop stop-color='rgba(39%2c 242%2c 198%2c 1)' offset='0.91'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
+     */
+   /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:svgjs='http://svgjs.com/svgjs' width='1920' height='1080' preserveAspectRatio='none' viewBox='0 0 1920 1080'%3e%3cg mask='url(%26quot%3b%23SvgjsMask2610%26quot%3b)' fill='none'%3e%3crect width='1920' height='1080' x='0' y='0' fill='url(%23SvgjsLinearGradient2611)'%3e%3c/rect%3e%3cpath d='M0 0L545.87 0L0 173.81z' fill='rgba(255%2c 255%2c 255%2c .1)'%3e%3c/path%3e%3cpath d='M0 173.81L545.87 0L804.3299999999999 0L0 523.27z' fill='rgba(255%2c 255%2c 255%2c .075)'%3e%3c/path%3e%3cpath d='M0 523.27L804.3299999999999 0L1310.27 0L0 706.97z' fill='rgba(255%2c 255%2c 255%2c .05)'%3e%3c/path%3e%3cpath d='M0 706.97L1310.27 0L1326.12 0L0 711.2z' fill='rgba(255%2c 255%2c 255%2c .025)'%3e%3c/path%3e%3cpath d='M1920 1080L1464.46 1080L1920 802.25z' fill='rgba(0%2c 0%2c 0%2c .1)'%3e%3c/path%3e%3cpath d='M1920 802.25L1464.46 1080L1208.35 1080L1920 549.58z' fill='rgba(0%2c 0%2c 0%2c .075)'%3e%3c/path%3e%3cpath d='M1920 549.58L1208.35 1080L630.3599999999999 1080L1920 373.28000000000003z' fill='rgba(0%2c 0%2c 0%2c .05)'%3e%3c/path%3e%3cpath d='M1920 373.28L630.3599999999999 1080L508.6799999999999 1080L1920 193.11999999999998z' fill='rgba(0%2c 0%2c 0%2c .025)'%3e%3c/path%3e%3c/g%3e%3cdefs%3e%3cmask id='SvgjsMask2610'%3e%3crect width='1920' height='1080' fill='white'%3e%3c/rect%3e%3c/mask%3e%3clinearGradient x1='10.94%25' y1='-19.44%25' x2='89.06%25' y2='119.44%25' gradientUnits='userSpaceOnUse' id='SvgjsLinearGradient2611'%3e%3cstop stop-color='rgba(177%2c 232%2c 109%2c 0.99)' offset='0.29'%3e%3c/stop%3e%3cstop stop-color='rgba(246%2c 180%2c 255%2c 1)' offset='0.65'%3e%3c/stop%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e");
+    */
+    background: linear-gradient(to right top ,#65dfc9,#6cdbeb);
+    backdrop-filter: blur(30px);
+}
+
+.glassEffect-personal-information {
+    background: white;
+    min-height: 50vh;
+    width: 70%;
+    background: linear-gradient(to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+    );
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+}
+.glassEffect-row-teeth {
+    background: white;
+    min-height: 50vh;
+    width: 80%;
+    background: linear-gradient(to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+    );
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+.glassEffect-patient-diagnosis {
+    background: white;
+    min-height: 60vh;
+    width: 90%;
+    background: linear-gradient(to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+    );
+    border-radius: 4px;
+    backdrop-filter: blur(4px);
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+
+
+
+
+
+.fields {
+    width: 70%;
+    line-height: 34px;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 400;
+
+}
+
+.fields:focus-visible {
+    outline: 0;
+    border-color: #6614d3;
+}
+
+.field_label {
+    margin-bottom: 4px;
+    font-size: 1.25rem;
+}
+
+
+p {
     color: #ffffff;
 }
-h4{
-    color:#ffffff;
+
+h4 {
+    color: #ffffff;
 }
-.floating_input{
+
+.floating_input {
     border-radius: 5px;
-    box-shadow: 10px 10px 20px 5px rgba(0,0,0,0.7);
+    box-shadow: 10px 10px 20px 5px rgba(0, 0, 0, 0.7);
     transition: .3s;
 }
-.floating_input:hover{
+
+.floating_input:hover {
     background: #fc7400;
     box-shadow: 0 0 30px #ffa001;
     color: #ffffff;
     transform: translateY(-3px);
 }
-.show_info{
-    color:white;
+
+.show_info {
+    color: white;
 }
 
 
@@ -25,14 +104,16 @@ h4{
     border: 2px solid black;
     border-radius: 10px;
 }
-.input_table{
-    width:20%;
-    border:2px solid black;
+
+.input_table {
+    width: 20%;
+    border: 2px solid black;
     text-align: center;
 }
-.input_table_line{
-    width:4%;
-    border:4px solid black;
+
+.input_table_line {
+    width: 4%;
+    border: 4px solid black;
     text-align: center;
 }
 
@@ -57,34 +138,42 @@ h4{
     border-color: #607d8b;
     background-color: #eceff1;
 }
-.td_table{
-    padding:0;
+
+.td_table {
+    padding: 0;
     text-align: center;
 }
-.input_td{
+
+.input_td {
     border: 0;
-    width:100%;
+    width: 100%;
     background: none;
     text-align: center;
 }
+
 .brick {
     background: #fff;
+    border-radius: 4px;
 }
-.podzub{
+
+.podzub {
     font-size: 14px;
     font-weight: 500;
 }
+
 .zub_img {
     width: 45px;
     height: 45px;
 }
+
 .zub_row_left {
     border-right: 1px solid #BDBDBD;
 }
+
 .zub_row_right {
     border-left: 1px solid #BDBDBD;
 }
 
-.list{
+.list {
     display: none;
 }
