@@ -34,7 +34,6 @@ https://itchief.ru/bootstrap/modal-->
                             Пациенты
                         </a>
                     </th>
-
                 </tr>
                 </thead>
                 <tbody id="tbody">
@@ -58,14 +57,14 @@ https://itchief.ru/bootstrap/modal-->
                             <label for="fullName" class="field_label">ФИО</label>
                             <input id="fullName" class="fields _req _fullName" type="text" required autocomplete="off"
                                    placeholder="Петров Петр Петрович">
-                            <p id="errorFullName"></p>
+                            <span id="errorFullName"></span>
                         </div>
                         <div class="col-2"></div>
                         <div class="col-5 mt-2">
                             <label for="phoneNumber" class="field_label">Номера телефона</label>
                             <input id="phoneNumber" class="fields _req _phoneNumber" type="text" required
                                    autocomplete="off">
-                            <p id="errorPhoneNumber"></p>
+                            <span id="errorPhoneNumber"></span>
 
                         </div>
                     </div>
@@ -75,7 +74,7 @@ https://itchief.ru/bootstrap/modal-->
                             <label for="minDatepicker" class="field_label">Дата записи</label>
                             <input id="minDatepicker" class="fields _req _minDatepicker" type="text" required
                                    autocomplete="off">
-                            <p id="errorDatepicker"></p>
+                            <span id="errorDatepicker"></span>
                         </div>
                         <div class="col-2"></div>
                         <div class="col-5">
@@ -121,7 +120,7 @@ https://itchief.ru/bootstrap/modal-->
                                 <option value="55">55</option>
                                 <option value="60">60</option>
                             </select>
-                            <p id="errorTime"></p>
+                            <span id="errorTime"></span>
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-2">
@@ -164,7 +163,7 @@ https://itchief.ru/bootstrap/modal-->
                         <div class="col-md-5">
                             <label for="lament" class="field_label">Причина обращения</label>
                             <input class="fields floating_input _req _lament" id="lament">
-                            <p id="errorLament"></p>
+                            <span id="errorLament"></span>
                         </div>
                     </div>
                 </form>

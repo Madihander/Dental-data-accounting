@@ -71,7 +71,7 @@ if (!is_null($checkResultDuplicate)) {
 verificationTime($startTime, $endTime);
 
 global $pdo;
-$sql = "INSERT INTO record_patient(fullName,phoneNumber, dateRecord, attendingDoctor,startTime,endTime,lament)
+$sql = "INSERT INTO avior_mk.record_patient(fullName,phoneNumber, dateRecord, attendingDoctor,startTime,endTime,lament)
         VALUES(:fullName,:phoneNumber, :dateRecord, :attendingDoctor,:startTime,:endTime,:lament)";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([
@@ -83,7 +83,7 @@ $stmt->execute([
     'endTime' => $endTime,
     'lament' => $lament,
 ]);
-$stmt = $pdo->prepare('SELECT id FROM record_patient WHERE fullName =:fullName AND dateRecord =:dateRecord
+$stmt = $pdo->prepare('SELECT id FROM avior_mk.record_patient WHERE fullName =:fullName AND dateRecord =:dateRecord
                                 AND startTime =:startTime AND endTime =:endTime');
 $stmt->execute([
     'fullName' => $fullName,
@@ -101,21 +101,13 @@ if ($row) {
     exit(sendResponse());
 }
 
-//Отправляет ответ ajax
-function sendResponse()
-{
-    global $response;
-    echo json_encode($response);
-}
 
 //Проверяем ФИО
 function verificationFullName($login)
 {
     global $response;
-    $regex = '/[а-яА-ЯЁё]+\s+[а-яА-ЯЁё]+\s+[а-яА-ЯЁё]+/ m';
-    if (!isset($login) || empty($login) || !preg_match($regex, $login)) {
-        $response = ['status' => '203', 'error' => '01'];
-        exit(sendResponse());
+    if (!isset($login) || empty($login)) {
+        die('BAD');
     } else {
         $response = ['status' => '200', 'error' => '00'];
         return $login;
@@ -220,7 +212,7 @@ function dataHashing($fullName, $phoneNumber)
 function checkDuplicatetime($time, $date)
 {
     global $pdo;
-    $sql = 'SELECT startTime,dateRecord FROM patients.patients_record_data WHERE startTime = :startTime AND dateRecord  =:dateRecord';
+    $sql = 'SELECT startTime,dateRecord FROM avior_mk.record_patient WHERE startTime = :startTime AND dateRecord  =:dateRecord';
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['startTime' => $time, 'dateRecord' => $date]);
     $result = $stmt->fetchAll();
@@ -243,3 +235,9 @@ function verificationTime($startTime, $endTime)
     }
 }
 
+//Отправляет ответ ajax
+function sendResponse()
+{
+    global $response;
+    echo json_encode($response);
+}

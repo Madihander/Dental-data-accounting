@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="electronic_journal_kz@localhost" uuid="77a5a385-668b-4fee-ba36-27a316d05c10">
-      <driver-ref>mysql</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:3306/electronic_journal_kz</jdbc-url>
-      <driver-properties>
-        <property name="autoReconnect" value="true" />
-      </driver-properties>
-    </data-source>
     <data-source source="LOCAL" name="avior_mk@localhost" uuid="98fed668-74b3-4208-8785-9f6ab2df5ab7">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>

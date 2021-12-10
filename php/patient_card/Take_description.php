@@ -1,9 +1,11 @@
 <?php
 require_once "../../includes/db.php";
 
-$field = $_POST['field'] ?? null;
+$field_id = $_POST['field_id'] ?? null;
 $id = $_POST['id'] ?? null;
-$response=['status' => '201', 'error' => null];
+$response = [];
+handlerField($field_id, $id);
+
 function handlerField($field, $id)
 {
     switch ($field) {
@@ -11,119 +13,62 @@ function handlerField($field, $id)
             takeDiagnosis();
             break;
         case "complaint":
-            takeComplaint($id);
+            takeAnotherDescription($id, 'SELECT description FROM complaint WHERE avior_mk.complaint.id_diseases = :id');
             break;
         case "anamnesis":
             takeAnamnesis();
             break;
         case "objectively":
-            takeObjectively($id);
+            takeAnotherDescription($id, 'SELECT description FROM objectively_visual_inspection WHERE avior_mk.objectively_visual_inspection.id_diseases = :id');
             break;
         case "treatment":
-            takeTreatment($id);
+            takeAnotherDescription($id, 'SELECT description FROM treatment WHERE avior_mk.treatment.id_diseases = :id;');
             break;
         case "recommend":
-            takeRecommend($id);
+            takeAnotherDescription($id, 'SELECT description FROM recommend WHERE avior_mk.recommend.id_diseases = :id');
             break;
     }
 }
-
 
 function takeDiagnosis()
 {
     global $pdo;
     global $response;
-    $stmt = $pdo->prepare("SELECT * FROM diagnosis");
-    $row = $stmt->fetch(PDO::FETCH_LAZY);
-    if ($row){
-        array_push($response,$row['id'],$row['description']);
-        exit(sendResponse());
-    }else{
-        $response = ['status'=>'203', 'error' => 'Не нашли совпадений'];
-        exit(sendResponse());
+    $stmt = $pdo->query("SELECT * FROM diagnosis");
+    while ($row = $stmt->fetch()) {
+        $response[] = $row;
     }
-}
-
-function takeComplaint($id)
-{
-    global $pdo;
-    global $response;
-    $stmt = $pdo->prepare("SELECT description FROM complaint WHERE avior_mk.complaint.id_diagnosis = :id;");
-    $stmt->execute(['id'=>$id]);
-    $row = $stmt->fetch(PDO::FETCH_LAZY);
-    if ($row){
-        array_push($response,$row['description']);
-        exit(sendResponse());
-    }else{
-        $response = ['status'=>'203', 'error' => 'Не нашли совпадений'];
-        exit(sendResponse());
-    }
+    exit(sendResponse());
 }
 
 function takeAnamnesis()
 {
     global $pdo;
     global $response;
-    $stmt = $pdo->prepare("SELECT description FROM avior_mk.anamnesis");
-    $row = $stmt->fetch(PDO::FETCH_LAZY);
-    if ($row){
-        array_push($response,$row['description']);
-        exit(sendResponse());
-    }else{
-        $response = ['status'=>'203', 'error' => 'Не нашли совпадений'];
-        exit(sendResponse());
+    $stmt = $pdo->query("SELECT description FROM anamnesis_morbi");
+    while ($row = $stmt->fetch()) {
+        $response[] = $row;
     }
+    exit(sendResponse());
 }
 
-function takeObjectively($id)
+function takeAnotherDescription($id, $request)
 {
     global $pdo;
     global $response;
-    $stmt = $pdo->prepare("SELECT description FROM objectively WHERE avior_mk.objectively.id_diagnosis = :id;");
-    $stmt->execute(['id'=>$id]);
-    $row = $stmt->fetch(PDO::FETCH_LAZY);
-    if ($row){
-        array_push($response,$row['description']);
-        exit(sendResponse());
-    }else{
-        $response = ['status'=>'203', 'error' => 'Не нашли совпадений'];
-        exit(sendResponse());
+    $stmt = $pdo->prepare($request);
+    $stmt->execute(['id' => $id]);
+    while ($row = $stmt->fetch()) {
+        $response[] = $row;
     }
+    exit(sendResponse());
+
 }
 
-function takeTreatment($id)
-{
-    global $pdo;
-    global $response;
-    $stmt = $pdo->prepare("SELECT description FROM treatment WHERE avior_mk.treatment.id_diagnosis = :id;");
-    $stmt->execute(['id'=>$id]);
-    $row = $stmt->fetch(PDO::FETCH_LAZY);
-    if ($row){
-        array_push($response,$row['description']);
-        exit(sendResponse());
-    }else{
-        $response = ['status'=>'203', 'error' => 'Не нашли совпадений'];
-        exit(sendResponse());
-    }
-}
 
-function takeRecommend($id)
-{
-    global $pdo;
-    global $response;
-    $stmt = $pdo->prepare("SELECT description FROM recommend WHERE avior_mk.recommend.id_diagnosis = :id;");
-    $stmt->execute(['id'=>$id]);
-    $row = $stmt->fetch(PDO::FETCH_LAZY);
-    if ($row){
-        array_push($response,$row['description']);
-        exit(sendResponse());
-    }else{
-        $response = ['status'=>'203', 'error' => 'Не нашли совпадений'];
-        exit(sendResponse());
-    }
-}
 function sendResponse()
 {
     global $response;
+    header('Content-Type: application/json');
     echo json_encode($response);
 }

@@ -1,21 +1,143 @@
+var str = 'Яблоки_круглые_и_яблоки_сочные';
+var newstr = str.replace(/\_/g, ' ');
+console.log(newstr);
+
+//шаблон заполнения на дату рождения
+$(function () {
+    $('#birthDate').mask("99.99.9999");
+});
 
 //чтобы менять картинки зубов и их значения
 function caries(toothId) {
     $(toothId).attr('src', 'caries.png');
-    $(toothId).attr('value','caries');
+    $(toothId).attr('value', 'caries');
 }
+
 function pulpit(toothId) {
     $(toothId).attr('src', 'pulpit.png');
-    $(toothId).attr('value','pulpit');
+    $(toothId).attr('value', 'pulpit');
 }
+
 function peredont(toothId) {
     $(toothId).attr('src', 'paradont.png');
-    $(toothId).attr('value','paradont');
+    $(toothId).attr('value', 'paradont');
+}
+
+// Собираем все поля связанные с длинными описаниями в tooth-info
+let tooth_info = $('.tooth-info');
+tooth_info.click(function (e) {
+    let field_id = e.target.id;
+    handlerField(field_id)
+
+});
+// handlerField - понять какое поле нажали
+// Атрибут data-id нужен для того,чтобы выводить связанные данные
+// (Диагноз Кариес=>будут выводится данные связанные с жалобами на кариес=>и.т.д)
+function handlerField(field_id) {
+    let data_id = $('#diagnosis').attr('data-id')
+    switch (field_id) {
+        case "diagnosis":
+            getDescription("diagnosis", data_id);
+            break;
+        case "complaint":
+            getDescription("complaint", data_id);
+            break;
+        case "anamnesis":
+            getDescription("anamnesis", data_id);
+            break;
+        case "objectively":
+            getDescription("objectively", data_id);
+            break;
+        case "treatment":
+            getDescription("treatment", data_id);
+            break;
+        case "recommend":
+            getDescription("recommend", data_id);
+            break;
+    }
+}
+//AJAX запрос на получение данных
+function getDescription(field_id, data_id) {
+    $('#descriptions').html('');
+    $.ajax({
+        url: '../php/patient_card/Take_description.php',
+        type: 'POST',
+        data: {
+            field_id: field_id,
+            id: data_id
+        },
+        dataType: 'JSON',
+        success: function (data) {
+            handlerData(data, field_id);
+        },
+        error: function (data) {
+            console.log(data);
+        }
+    });
+}
+// HandlerData -обрабатывает полученные данные, смотрит если есть id,
+// то это значит что пришли данные диагноз, если нет то это остальные поля
+function handlerData(data, field_id) {
+    for (let index = 0; index < data.length; index++) {
+        let obj = data[index];
+        if (!obj.id) {
+            anotherDescription(obj, field_id)
+        } else {
+            diagnosisDescription(obj)
+        }
+    }
+}
+//Создает список радио кнопок
+function diagnosisDescription(obj) {
+    let checkboxes = `<div class="form-check">
+                <input class="form-check-input diagnosis-description" type="radio" name="radio-buttons"
+                 id=${obj.id} value="${obj.description}" checked onclick="getCheckedRadioDiagnosis()">
+                <label class="form-check-label">
+                    ${obj.description}
+                </label>
+            </div>`
+    $('#descriptions').append(checkboxes)
+}
+//Создает список checkboxes
+function anotherDescription(obj, field_id) {
+    let checkboxes = `<div class="form-check">
+                <input class="form-check-input another-description" type="checkbox" value="${obj.description}"
+                onclick="getCheckedCheckboxesAnother(${field_id})">
+                <label class="form-check-label">
+                    ${obj.description}
+                </label>
+            </div>`;
+    $('#descriptions').append(checkboxes)
+}
+//Выбранные данные передает в поле диагноз
+function getCheckedRadioDiagnosis() {
+    let diagnosis = document.getElementById('diagnosis');
+    diagnosis.value = "";
+    let radios = document.getElementsByClassName('diagnosis-description');
+    for (let index = 0; index < radios.length; index++) {
+        if (radios[index].checked) {
+            diagnosis.value = radios[index].value.replace(/\_/g, ' ');
+            let dataId = radios[index].id;
+            console.log(dataId);
+            diagnosis.setAttribute('data-id', dataId);
+        }
+    }
+}
+// Выбранные данные передает в field_id
+function getCheckedCheckboxesAnother(field_id) {
+    let field = field_id;
+    field.innerHTML = ' '
+    let checkboxes = document.getElementsByClassName('another-description');
+    for (let index = 0; index < checkboxes.length; index++) {
+        if (checkboxes[index].checked) {
+            field.append(checkboxes[index].value + ',');
+        }
+    }
 }
 
 //Что все связанно с Диагнозом
 //////////////////////////////////////////////
-function showDiagnosis(){
+/*function showDiagnosis(){
     $('.categoryDiagnosis').removeAttr('hidden')
     $('.categoriesComplaint').attr("hidden","true");
     $('.categoryAnamnesis').attr("hidden","true");
@@ -255,6 +377,7 @@ function getCheckedCheckBoxesRecommend(){
   Это выводит все то что мне надо, но название до сих пор выводится ввиде цифр и букву - наверное шифрование со стороны PDO
   ПОэтому придется Опять эту оставить,Пойду дальше делать однотипные функции.
 */
+
 /*
 function showDiagnosis() {
     $.ajax({
@@ -269,7 +392,7 @@ function showDiagnosis() {
     })
 }
 */
-
+// эти функции меняют Ряды Зубов
 function changeRowOfTeethOnSmall() {
     let smallRowTeeth = `<div class="row">
                     <!--Правый ряд-->
@@ -914,14 +1037,117 @@ function changeRowOfTeethOnBig() {
     }
 }
 
+// Функция для распечатки заполненых полей
+$('#submit').click(function () {
+    $('.form-control').removeClass('invalid')
+    let error = formValidate();
+    if (error === 0) {
+        alert("Данные проверены");
+        printData();
+    } else {
+        alert("Ошибка")
+    }
+//  Проверка полей
+    function formValidate() {
+        let error = 0
+        let fullName = $('#fullName');
+        let birthDate = $('#birthDate');
+        let homeAddress = $('#homeAddress');
+        let age = $('#age');
+        let workPlace = $('#workPlace');
+        let tooth = $('#tooth');
+        let diagnosis = $('#diagnosis');
+        let complaint = $('#complaint');
+        let anamnesis = $('#anamnesis');
+        let objectively = $('#objectively');
+        let treatment = $('#treatment');
+        let recommend = $('#recommend');
 
+        if (!inputTest(fullName)) {
+            formAddError(fullName)
+            error++
+        } else if (!inputTest(birthDate)) {
+            formAddError(birthDate)
+            error++
+        } else if (!inputTest(homeAddress)) {
+            homeAddress.addClass('invalid');
+            error++
+        } else if (!inputTest(age)) {
+            age.addClass('invalid');
+            error++
+        } else if (!inputTest(workPlace)) {
+            workPlace.addClass('invalid');
+            error++
+        } else if (!inputTest(tooth)) {
+            tooth.addClass('invalid');
+            error++
+        } else if (!inputTest(diagnosis)) {
+            diagnosis.addClass('invalid');
+            error++
+        } else if (!inputTest(complaint)) {
+            complaint.addClass('invalid');
+            error++
+        } else if (!inputTest(anamnesis)) {
+            anamnesis.addClass('invalid');
+            error++
+        } else if (!inputTest(objectively)) {
+            objectively.addClass('invalid');
+            error++
+        } else if (!inputTest(treatment)) {
+            treatment.addClass('invalid');
+            error++
+        } else if (!inputTest(recommend)) {
+            recommend.addClass('invalid');
+            error++
+        }
+        console.log(error);
+        return error;
+    }
+// Распечатывает заполненые данные
+    function printData() {
+        let printBlock = `
+<form class="print">
+    <h4>ИП "КАЖИБЕКОВ"</h4>
+    <h5>Ф.И.О.:${$("#fullName").val()}</h5>
+    <h5>Дата рождения:${$("#birthDate").val()}</h5>
+    <h5>Дом.адрес:${$("#homeAddress").val()}</h5>
+    <h5>Возраст:${$("#age").val()}</h5>
+    <<h5>Место работы:${$("#workPlace").val()}</h5>
+    <h5>Зубы,которые личились:${$("#tooth").val()}</h5>
+    <h5>Диагноз:${$("#diagnosis").val()}</h5>
+    <h5>Жалобы:${$("#complaint").val()}</h5>
+    <h5>Анамнезис:${$("#anamnesis").val()}</h5>
+    <h5>Объективно:${$("#objectively").val()}</h5>
+    <h5>Лечение:${$("#treatment").val()}</h5>
+    <h5>Рекомендации:${$("#recommend").val()}</h5>
+</form>`
+
+        $('body').prepend(printBlock)
+        window.print();
+    }
+// Проверка полей на заполненость
+    function inputTest(input) {
+        if (input.val() === '') {
+            console.log(456);
+            return false
+        } else {
+            console.log(123);
+            return true;
+        }
+    }
+// Добавляет красный бордер если ошибка
+    function formAddError(input) {
+        input.addClass('invalid');
+    }
+
+});
 
 //После Нажатия на кнопку "Сохранить"-> ajax запрос в базу чтобы добавить новые данные
 function insertData() {
 
     $.ajax({
-        url:'../php/patient_card/insert_data_patient.php',
-        type:'POST',
+        url: '../php/patient_card/insert_data_patient.php',
+        type: 'POST',
         data: {
             fullName: $('#fullName').val(),
             birthDate: $('#birthDate').val(),
@@ -937,7 +1163,7 @@ function insertData() {
             tooth13: $('#tooth13').val(),
             tooth12: $('#tooth12').val(),
             tooth11: $('#tooth11').val(),
-            
+
             tooth21: $('#tooth21').val(),
             tooth22: $('#tooth22').val(),
             tooth23: $('#tooth23').val(),
@@ -971,11 +1197,11 @@ function insertData() {
             treatment: $('#treatment').val(),
             recommend: $('#recommend').val(),
         },
-        dataType:'JSON',
-        success:function(data){
+        dataType: 'JSON',
+        success: function (data) {
             let res;
             res = JSON.parse(data);
-            if(res==='good'){
+            if (res === 'good') {
                 alert('Карточка Успешно Сохранена');
             }
         }

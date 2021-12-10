@@ -29,7 +29,7 @@ session_start();
         </li>
         <li class="mt-3 mb-3">
             <div class="pr-3 pl-3">
-                <a href="patient_card.php" class="floating_button">
+                <a href="redis_patient_card.php" class="floating_button">
                     ЛИЧНАЯ КАРТА ПАЦИЕНТА
                 </a>
             </div>

@@ -1,3 +1,11 @@
+@media print {
+    body{
+        visibility: hidden;
+    }
+    .print{
+        visibility: visible;
+    }
+}
 body {
     height: 100vh;
     width: 100%;
@@ -48,8 +56,19 @@ body {
     padding-left: 2rem;
 }
 
+.multi-level, .item ul {
+    display: none;
+}
+.multi-level, .item input:checked ~ ul{
+    display: block;
+}
 
-
+.valid{
+    border-color: rgb(39,242,120);
+}
+.invalid{
+    border-color:rgb(246,52,52) ;
+}
 
 
 
