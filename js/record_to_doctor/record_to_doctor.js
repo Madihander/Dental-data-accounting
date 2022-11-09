@@ -150,7 +150,7 @@ function addRecordtoTable(patientName, patientLament, patientDateRecord, startTi
     else {
         alert('Пациент записан на ' + patientDateRecord);
         $('#recordingCard').modal("hide");
-        $('.data_patient').val('');
+        $('._req').val(' ').removeClass('valid', 'invalid');
     }
 }
 

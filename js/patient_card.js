@@ -56,6 +56,7 @@ function handlerField(field_id) {
             break;
     }
 }
+
 //AJAX запрос на получение данных
 function getDescription(field_id, data_id) {
     $('#descriptions').html('');
@@ -75,6 +76,7 @@ function getDescription(field_id, data_id) {
         }
     });
 }
+
 // HandlerData -обрабатывает полученные данные, смотрит если есть id,
 // то это значит что пришли данные диагноз, если нет то это остальные поля
 function handlerData(data, field_id) {
@@ -87,6 +89,7 @@ function handlerData(data, field_id) {
         }
     }
 }
+
 //Создает список радио кнопок
 function diagnosisDescription(obj) {
     let checkboxes = `<div class="form-check">
@@ -98,10 +101,11 @@ function diagnosisDescription(obj) {
             </div>`
     $('#descriptions').append(checkboxes)
 }
+
 //Создает список checkboxes
 function anotherDescription(obj, field_id) {
     let checkboxes = `<div class="form-check">
-                <input class="form-check-input another-description" type="checkbox" value="${obj.description}"
+                <input class="form-check-input another-checkboxes-description" type="checkbox" value="${obj.description}"
                 onclick="getCheckedCheckboxesAnother(${field_id})">
                 <label class="form-check-label">
                     ${obj.description}
@@ -109,6 +113,7 @@ function anotherDescription(obj, field_id) {
             </div>`;
     $('#descriptions').append(checkboxes)
 }
+
 //Выбранные данные передает в поле диагноз
 function getCheckedRadioDiagnosis() {
     let diagnosis = document.getElementById('diagnosis');
@@ -123,17 +128,76 @@ function getCheckedRadioDiagnosis() {
         }
     }
 }
-// Выбранные данные передает в field_id
+
 function getCheckedCheckboxesAnother(field_id) {
     let field = field_id;
-    field.innerHTML = ' '
-    let checkboxes = document.getElementsByClassName('another-description');
+    let checkboxes = $('.another-checkboxes-description');
+    checkboxes.on('click change', function () {
+        let values = [];
+        checkboxes.filter(':checked').each(function () {
+            values.push(this.value);
+        });
+        $(field).val(values.join(','));
+    });
+}
+
+function getTemplateDescription(template) {
+    $.ajax({
+        url: '../php/patient_card/Take_template.php',
+        type: 'POST',
+        data: {
+            template: template,
+        },
+        dataType: 'JSON',
+        success: function (data) {
+            let values = [];
+            $('#diagnosis').val(data[0].description);
+            console.log(data);
+            for (let index = 0; index < data[1].length; index++) {
+                values.push(data[1][index].description);
+            }
+            $('#complaint').val(values.join(', '));
+            values = [];
+            for (let index = 0; index < data[2].length; index++) {
+                values.push(data[2][index].description);
+            }
+            $('#anamnesis').val(values.join(''));
+            values = [];
+            $('#objectively').val(data[3].description);
+            $('#treatment').val(data[4].description);
+            $('#recommend').val(data[5].description);
+
+        },
+        error: function (data) {
+            console.log("BAD");
+            console.log(data);
+        }
+    })
+}
+
+// Выбранные данные передает в field_id
+
+/*function getCheckedCheckboxesAnother(field_id) {
+    let field = field_id;
+    let checkboxes = document.getElementsByClassName('another-checkboxes-description');
     for (let index = 0; index < checkboxes.length; index++) {
         if (checkboxes[index].checked) {
-            field.append(checkboxes[index].value + ',');
+            field.append(checkboxes[index].value);
         }
     }
 }
+
+function getUncheckedCheckboxesAnother(field_id) {
+    let field = field_id;
+    let checkboxes = document.getElementsByClassName('another-checkboxes-description');
+    for (let index = 0; index < checkboxes.length; index++) {
+        if (!checkboxes[index].checked) {
+            //field.textContent = field.textContent.replace(checkboxes[index].value, " ");
+            field.value = checkboxes[index].value.replace(/\_/g, ' ');
+        }
+    }
+}*/
+
 
 //Что все связанно с Диагнозом
 //////////////////////////////////////////////
@@ -392,6 +456,7 @@ function showDiagnosis() {
     })
 }
 */
+
 // эти функции меняют Ряды Зубов
 function changeRowOfTeethOnSmall() {
     let smallRowTeeth = `<div class="row">
@@ -1047,6 +1112,7 @@ $('#submit').click(function () {
     } else {
         alert("Ошибка")
     }
+
 //  Проверка полей
     function formValidate() {
         let error = 0
@@ -1103,16 +1169,20 @@ $('#submit').click(function () {
         console.log(error);
         return error;
     }
+
 // Распечатывает заполненые данные
     function printData() {
+        let windowForPrint = window.open();
         let printBlock = `
-<form class="print">
+<form class="print"
     <h4>ИП "КАЖИБЕКОВ"</h4>
     <h5>Ф.И.О.:${$("#fullName").val()}</h5>
     <h5>Дата рождения:${$("#birthDate").val()}</h5>
     <h5>Дом.адрес:${$("#homeAddress").val()}</h5>
     <h5>Возраст:${$("#age").val()}</h5>
-    <<h5>Место работы:${$("#workPlace").val()}</h5>
+    <h5>Место работы:${$("#workPlace").val()}</h5>
+    
+    <br>
     <h5>Зубы,которые личились:${$("#tooth").val()}</h5>
     <h5>Диагноз:${$("#diagnosis").val()}</h5>
     <h5>Жалобы:${$("#complaint").val()}</h5>
@@ -1120,11 +1190,11 @@ $('#submit').click(function () {
     <h5>Объективно:${$("#objectively").val()}</h5>
     <h5>Лечение:${$("#treatment").val()}</h5>
     <h5>Рекомендации:${$("#recommend").val()}</h5>
-</form>`
-
-        $('body').prepend(printBlock)
-        window.print();
+</form>`;
+        windowForPrint.document.write(printBlock);
+        windowForPrint.print();
     }
+
 // Проверка полей на заполненость
     function inputTest(input) {
         if (input.val() === '') {
@@ -1135,6 +1205,7 @@ $('#submit').click(function () {
             return true;
         }
     }
+
 // Добавляет красный бордер если ошибка
     function formAddError(input) {
         input.addClass('invalid');

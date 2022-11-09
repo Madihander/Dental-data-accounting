@@ -60,11 +60,8 @@ $data = [];
 //Проверка записан кто-либо на это время в этот день
 $checkResultDuplicate = checkDuplicatetime($startTime, $dateRecord);
 if (!is_null($checkResultDuplicate)) {
-    $response['status'] = 400;
-    if ($checkResultDuplicate = 'duplicate') {
-        $response = ['status' => '203', 'error' => '010'];
-        exit(sendResponse());
-    }
+    $response = ['status' => '203', 'error' => '010'];
+    exit(sendResponse());
 }
 //Пока что не требуется
 //dataHashing($fullName, $phoneNumber);
@@ -107,7 +104,7 @@ function verificationFullName($login)
 {
     global $response;
     if (!isset($login) || empty($login)) {
-        die('BAD');
+        $response = ['status' => '203', 'error' => '01'];
     } else {
         $response = ['status' => '200', 'error' => '00'];
         return $login;
@@ -118,8 +115,8 @@ function verificationFullName($login)
 function verificationPhoneNumber($number)
 {
     global $response;
-    $regex = '/^(\+)?(\(\d{2,3}\) ?\d|\d)(([ \-]?\d)|( ?\(\d{2,3}\) ?)){5,12}\d$/';
-    if (!isset($number) || empty($number) || !preg_match($regex, $number)) {
+    //$regex = '/^(\+)?(\(\d{2,3}\) ?\d|\d)(([ \-]?\d)|( ?\(\d{2,3}\) ?)){5,12}\d$/';
+    if (!isset($number) || empty($number)) {
         $response = ['status' => '203', 'error' => '02'];
         exit(sendResponse());
     } else {
@@ -212,12 +209,12 @@ function dataHashing($fullName, $phoneNumber)
 function checkDuplicatetime($time, $date)
 {
     global $pdo;
-    $sql = 'SELECT startTime,dateRecord FROM avior_mk.record_patient WHERE startTime = :startTime AND dateRecord  =:dateRecord';
+    $sql = 'SELECT startTime,dateRecord FROM record_patient WHERE startTime = :startTime AND dateRecord  =:dateRecord';
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['startTime' => $time, 'dateRecord' => $date]);
     $result = $stmt->fetchAll();
     if (count($result) == 0) return null;
-    if (count($result) == 2) return 'duplicate';
+    if (count($result) == 1) return 'duplicate';
 }
 
 function verificationTime($startTime, $endTime)
